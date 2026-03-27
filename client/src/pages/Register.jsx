@@ -91,6 +91,14 @@ export default function Register() {
     <div className={styles.page}>
       {/* Left brand panel */}
       <div className={styles.panel}>
+        <video
+          className={styles.panelBg}
+          src="/wallpaper1.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
         <div className={styles.panelInner}>
           <img src="/logo1.jpg" alt="OncoCliniq" className={styles.panelLogo} />
           <h2 className={styles.panelTitle}>OncoCliniq</h2>
