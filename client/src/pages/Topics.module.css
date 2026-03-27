@@ -1,0 +1,356 @@
+.page {
+  min-height: calc(100vh - var(--nav-h));
+  background: #f3f6fa;
+}
+
+.header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  margin: 0;
+}
+
+.statsRow {
+  max-width: 1100px;
+  margin: 0 auto 1.25rem;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.statTile {
+  background: #ffffff;
+  border-radius: var(--r-xl);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.06);
+  padding: 1rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 120px;
+}
+
+.statNum {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.error {
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+  padding: 0 1.5rem;
+  color: var(--red-600);
+  font-size: 0.9rem;
+}
+
+.topicsGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.topicCard {
+  background: #ffffff;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.topicCard:hover {
+  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.1);
+  transform: translateY(-2px);
+}
+
+.topicRow {
+  display: flex;
+  align-items: stretch;
+  min-height: 80px;
+}
+
+.topicAccent {
+  width: 5px;
+  flex-shrink: 0;
+}
+
+.topicContent {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.topicIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.topicInfo {
+  flex: 1;
+  min-width: 160px;
+}
+
+.topicName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.3;
+  margin: 0 0 0.4rem;
+}
+
+.topicMeta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.topicStat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+.statNum {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--gray-900);
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.startBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: var(--blue-50);
+  color: var(--brand-blue);
+  border: 1.5px solid var(--blue-200);
+  border-radius: var(--r);
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.startBtn:hover:not(:disabled) {
+  background: var(--blue-100);
+  border-color: var(--blue-600);
+}
+
+.startBtn:disabled {
+  background: var(--gray-100) !important;
+  color: var(--gray-400) !important;
+  border-color: var(--gray-200) !important;
+  cursor: not-allowed;
+}
+
+.topicActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+/* Subtopics */
+.subtopicsSection {
+  border-top: 1px solid var(--gray-100);
+  padding: 0.6rem 1.5rem 1rem 1.5rem;
+}
+
+.subtopicsToggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 0.2rem 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.subtopicsToggle:hover {
+  color: var(--gray-700);
+}
+
+.subtopicsList {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.subtopicRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--gray-50);
+  border-radius: var(--r);
+  border: 1px solid var(--gray-100);
+}
+
+.subtopicInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.subtopicName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtopicCount {
+  font-size: 0.7rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.subtopicActions {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.progressHint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin: 0;
+}
+
+.progressHint::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f59e0b;
+  flex-shrink: 0;
+}
+
+.restartBtn {
+  display: inline-flex;
+  align-items: center;
+  background: var(--gray-50);
+  color: var(--gray-500);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--r);
+  padding: 0.5rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.restartBtn:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+.modeRow {
+  display: flex;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.learnBtn,
+.testBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--blue-50);
+  color: var(--brand-blue);
+  border: 1.5px solid var(--blue-200);
+  border-radius: var(--r);
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.learnBtn:hover:not(:disabled),
+.testBtn:hover:not(:disabled) {
+  background: var(--blue-100);
+  border-color: var(--blue-600);
+}
+
+.learnBtn:disabled,
+.testBtn:disabled {
+  background: var(--gray-100) !important;
+  color: var(--gray-400) !important;
+  border-color: var(--gray-200) !important;
+  cursor: not-allowed;
+}

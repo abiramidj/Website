@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0b1e3d"/>
+      <stop offset="60%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Badge background -->
+  <rect width="48" height="48" rx="13" fill="url(#bg)"/>
+  <!-- Shine overlay -->
+  <rect width="48" height="48" rx="13" fill="url(#shine)"/>
+
+  <!-- Medical cross — vertical arm -->
+  <rect x="20.5" y="9" width="7" height="30" rx="3.5" fill="white" opacity="0.95"/>
+  <!-- Medical cross — horizontal arm -->
+  <rect x="9" y="20.5" width="30" height="7" rx="3.5" fill="white" opacity="0.95"/>
+
+  <!-- Center jewel -->
+  <circle cx="24" cy="24" r="5.5" fill="url(#bg)"/>
+  <circle cx="24" cy="24" r="3.5" fill="white" opacity="0.9"/>
+</svg>

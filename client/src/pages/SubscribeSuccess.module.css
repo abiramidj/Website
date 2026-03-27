@@ -1,0 +1,110 @@
+.page {
+  min-height: calc(100vh - var(--nav-h));
+  background: #f3f6fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  padding: 3rem 2.5rem;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+}
+
+.icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #0f2744;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.6rem;
+}
+
+.sub {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.activating {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  animation: pulse 1.5s ease-in-out infinite;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.primaryBtn {
+  display: block;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(29,78,216,0.35);
+  transition: opacity 0.15s;
+}
+.primaryBtn:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+
+.secondaryBtn {
+  display: block;
+  background: #f1f5f9;
+  color: #0f2744;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.secondaryBtn:hover { background: #e2e8f0; text-decoration: none; }
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #166534;
+  line-height: 1.4;
+}
+
+.bullet span {
+  color: #22c55e;
+  font-weight: 800;
+  flex-shrink: 0;
+}

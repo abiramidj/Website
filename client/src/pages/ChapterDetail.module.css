@@ -1,0 +1,211 @@
+.page {
+  min-height: calc(100vh - var(--nav-h));
+  background: #f3f6fa;
+}
+
+/* Header */
+.header {
+  background: #fff;
+  border-bottom: 3px solid var(--accent, #1d4ed8);
+  padding: 2rem 1.5rem 2.5rem;
+}
+
+.headerInner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--blue-50);
+  color: var(--brand-blue);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid var(--blue-200);
+  border-radius: var(--r);
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.backLink:hover { background: var(--blue-100); border-color: var(--blue-600); text-decoration: none; }
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.domainTag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.subtopicTag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.title {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #0f2744;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 0.65rem;
+}
+
+.excerpt {
+  font-size: 1rem;
+  color: #475569;
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.dateLine {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+/* Content */
+.contentWrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* Article prose styles */
+.article {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #1e293b;
+}
+
+.article :global(h1),
+.article :global(h2),
+.article :global(h3),
+.article :global(h4) {
+  font-weight: 800;
+  color: #0f2744;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.article :global(h1) { font-size: 1.6rem; }
+.article :global(h2) { font-size: 1.3rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.4rem; }
+.article :global(h3) { font-size: 1.1rem; }
+.article :global(h4) { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; color: #475569; }
+
+.article :global(p) {
+  margin-bottom: 1.25rem;
+}
+
+.article :global(strong) { font-weight: 700; color: #0f2744; }
+.article :global(em) { font-style: italic; }
+
+.article :global(ul),
+.article :global(ol) {
+  margin: 0 0 1.25rem 1.5rem;
+  padding: 0;
+}
+
+.article :global(li) {
+  margin-bottom: 0.4rem;
+  line-height: 1.7;
+}
+
+.article :global(blockquote) {
+  border-left: 4px solid #1d4ed8;
+  background: #eff6ff;
+  color: #1e3a5f;
+  margin: 1.5rem 0;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+.article :global(pre) {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.article :global(code) {
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: 0.875em;
+  background: #f1f5f9;
+  color: #0f2744;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.article :global(pre code) {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.article :global(hr) {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin: 2rem 0;
+}
+
+/* Footer */
+.footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.footerBack {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--blue-50);
+  color: var(--brand-blue);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--blue-200);
+  border-radius: var(--r);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.footerBack:hover { background: var(--blue-100); border-color: var(--blue-600); text-decoration: none; }
+
+/* Error */
+.errorPage {
+  max-width: 500px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 1.5rem;
+}
+.errorMsg {
+  color: #b91c1c;
+  margin-bottom: 1.25rem;
+}

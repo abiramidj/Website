@@ -1,0 +1,259 @@
+.page {
+  min-height: calc(100vh - var(--nav-h));
+  background: #f3f6fa;
+  padding: 3rem 1.5rem 5rem;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+  background: #dbeafe;
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #0f2744;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+/* ── Active banner ── */
+.activeBanner {
+  max-width: 680px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  color: #166534;
+  flex-wrap: wrap;
+}
+
+.activeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+.portalBtn {
+  margin-left: auto;
+  background: none;
+  border: 1px solid #86efac;
+  color: #166534;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.portalBtn:hover:not(:disabled) { background: #dcfce7; }
+.portalBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Error ── */
+.error {
+  max-width: 680px;
+  margin: 0 auto 1rem;
+  background: #fff1f2;
+  border: 1px solid #fecaca;
+  border-left: 3px solid #ef4444;
+  color: #b91c1c;
+  font-size: 0.875rem;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+}
+
+/* ── Plan cards ── */
+.plans {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  flex: 1;
+  min-width: 240px;
+  max-width: 300px;
+  position: relative;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+
+.cardFeatured {
+  border-color: #1d4ed8;
+  box-shadow: 0 4px 24px rgba(29,78,216,0.15);
+}
+
+.badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.9rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.planLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.planPrice {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #0f2744;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.planPeriod {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.planDesc {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  min-height: 1.5rem;
+}
+
+.planBtn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #1d4ed8;
+  background: #fff;
+  color: #1d4ed8;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.planBtn:hover:not(:disabled) { background: #eff6ff; }
+.planBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.planBtnFeatured {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(29,78,216,0.35);
+}
+.planBtnFeatured:hover:not(:disabled) { opacity: 0.9; background: linear-gradient(135deg, #1d4ed8, #2563eb); }
+
+/* ── Feature list ── */
+.features {
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+}
+
+.featuresTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f2744;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.featureCheck {
+  color: #22c55e;
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+
+/* ── Fine print ── */
+.fine {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── Admin notice ── */
+.adminNotice {
+  max-width: 480px;
+  margin: 4rem auto;
+  text-align: center;
+  background: #dbeafe;
+  border-radius: 12px;
+  padding: 2rem;
+  font-size: 0.95rem;
+  color: #1e3a8a;
+  font-weight: 500;
+}

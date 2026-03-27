@@ -1,0 +1,706 @@
+.page {
+  min-height: calc(100vh - var(--nav-h));
+  background: #f3f6fa;
+}
+
+/* Instructions */
+.instructionsCard {
+  max-width: 820px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  background: #ffffff;
+  border: none;
+  border-radius: var(--r-xl);
+  box-shadow: 0 4px 32px 0 rgb(0 0 0 / 0.09);
+}
+
+.instrTitle {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.instrSubtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray-500);
+  margin-bottom: 1.75rem;
+}
+
+.instrList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.instrList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.925rem;
+  color: var(--gray-700);
+  padding: 0.65rem 0.85rem;
+  background: var(--gray-50);
+  border-radius: var(--r);
+  border: 1px solid var(--gray-100);
+}
+
+.instrList li::before {
+  content: '✓';
+  color: var(--green-600);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.startBtn {
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-h));
+  color: #ffffff;
+  border: none;
+  border-radius: var(--r);
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  width: 100%;
+  box-shadow: 0 2px 10px 0 rgb(29 78 216 / 0.35);
+  letter-spacing: 0.01em;
+}
+
+.startBtn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.startBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Progress strip */
+.progressStrip {
+  height: 4px;
+  background: var(--gray-200);
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 20;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-teal));
+  transition: width 0.35s ease;
+}
+
+/* Top bar */
+.topBar {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+  padding: 0.7rem 0;
+  position: sticky;
+  top: calc(var(--nav-h) + 4px);
+  z-index: 10;
+  box-shadow: 0 1px 12px 0 rgb(0 0 0 / 0.05);
+}
+
+.topBarInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.topTopic {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--brand-navy);
+  flex: 1;
+}
+
+.topProgress {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  font-weight: 600;
+}
+
+.topTimer {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--gray-100);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--gray-200);
+}
+
+.timerIcon {
+  font-size: 0.85rem;
+}
+
+.timerUrgent {
+  background: var(--red-100);
+  color: var(--red-600);
+  border-color: #fca5a5;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Layout */
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: none;
+  border-radius: var(--r-lg);
+  padding: 1.25rem 1rem;
+  position: sticky;
+  top: calc(var(--nav-h) + 55px);
+  box-shadow: 0 2px 16px 0 rgb(0 0 0 / 0.07);
+}
+
+.sidebarTitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--gray-400);
+  margin-bottom: 1rem;
+}
+
+.navGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.navBtn {
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--r-sm);
+  padding: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  aspect-ratio: 1;
+}
+
+.navBtn:hover {
+  background: var(--gray-200);
+}
+
+.navAnswered {
+  background: var(--green-100);
+  border-color: #86efac;
+  color: var(--green-700);
+}
+
+.navCurrent {
+  background: var(--brand-blue);
+  border-color: var(--brand-blue);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 1px 4px 0 rgb(29 78 216 / 0.4);
+}
+
+.sidebarLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--gray-400);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotAnswered {
+  background: var(--green-500);
+}
+
+.dotCurrent {
+  background: var(--brand-blue);
+}
+
+/* Question Card */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.questionCard {
+  background: #ffffff;
+  border: none;
+  border-radius: var(--r-xl);
+  padding: 2.5rem;
+  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.08);
+}
+
+.questionMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.qNum {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.diffBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--r-full);
+  text-transform: capitalize;
+}
+
+.diff_easy {
+  background: var(--green-100);
+  color: var(--green-700);
+}
+
+.diff_medium {
+  background: var(--amber-100);
+  color: var(--amber-600);
+}
+
+.diff_hard {
+  background: var(--red-100);
+  color: var(--red-600);
+}
+
+.questionStem {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--gray-900);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+
+.optionBtn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: var(--gray-50);
+  border: 1.5px solid transparent;
+  border-radius: var(--r-lg);
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.925rem;
+  color: var(--gray-700);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  width: 100%;
+  font-family: inherit;
+}
+
+.optionBtn:hover {
+  background: var(--blue-50);
+  border-color: var(--blue-200);
+  transform: translateX(2px);
+}
+
+.optionSelected {
+  background: var(--blue-50);
+  border-color: var(--brand-blue);
+  color: var(--blue-800);
+  box-shadow: 0 0 0 4px rgb(29 78 216 / 0.08);
+  transform: translateX(2px);
+}
+
+.optionLabel {
+  font-weight: 800;
+  color: var(--gray-400);
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  margin-top: 0.1rem;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.optionSelected .optionLabel {
+  background: var(--brand-blue);
+  color: #ffffff;
+  border-color: var(--brand-blue);
+}
+
+.optionText {
+  line-height: 1.5;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navPrev,
+.navNext,
+.submitBtn {
+  border: none;
+  border-radius: var(--r);
+  padding: 0.72rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+
+.navPrev {
+  background: var(--gray-100);
+  color: var(--gray-600);
+  border: 1px solid var(--gray-200);
+}
+
+.navPrev:hover:not(:disabled) {
+  background: var(--gray-200);
+}
+
+.navPrev:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.navNext {
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-h));
+  color: #ffffff;
+  margin-left: auto;
+  box-shadow: 0 2px 8px 0 rgb(29 78 216 / 0.3);
+}
+
+.navNext:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.submitBtn {
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  color: #ffffff;
+  margin-left: auto;
+  box-shadow: 0 2px 8px 0 rgb(22 163 74 / 0.35);
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.error {
+  background: var(--red-100);
+  border: 1px solid #fca5a5;
+  color: var(--red-600);
+  padding: 0.75rem 1rem;
+  border-radius: var(--r);
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+/* ── Mode Select (Instructions Screen) ───────────────────────────── */
+
+.modeSelectGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .modeSelectGrid { grid-template-columns: 1fr; }
+}
+
+.modeCard {
+  border-radius: var(--r-xl);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modeCardLearn {
+  background: #f7fffe;
+  border: 1.5px solid #d0f0ed;
+}
+
+.modeCardTest {
+  background: #f5f6ff;
+  border: 1.5px solid #dde3ff;
+}
+
+.modeCardIcon {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.modeCardTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.modeCardDesc {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  line-height: 1.65;
+  flex: 1;
+  margin: 0;
+}
+
+.modeCardBtn {
+  border-radius: var(--r-full);
+  padding: 0.8rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+  margin-top: 0.5rem;
+  letter-spacing: 0.01em;
+  width: 100%;
+  font-family: inherit;
+  box-shadow: none;
+}
+
+.modeCardBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.modeCardBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.modeCardBtnLearn {
+  background: #ccfbf1;
+  color: #0f766e;
+  border: 1.5px solid #99f6e4;
+}
+
+.modeCardBtnLearn:hover:not(:disabled) {
+  background: #b2f5e8;
+  border-color: #5eead4;
+}
+
+.modeCardBtnTest {
+  background: #e0e7ff;
+  color: #4338ca;
+  border: 1.5px solid #c7d2fe;
+}
+
+.modeCardBtnTest:hover:not(:disabled) {
+  background: #c7d2fe;
+  border-color: #a5b4fc;
+}
+
+/* ── Mode Badge (Top Bar) ─────────────────────────────────────────── */
+
+.modeBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--r-full);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.modeBadgeLearn {
+  background: #f0fdfc;
+  color: #0d9488;
+  border: 1px solid #99f6e4;
+}
+
+.modeBadgeTest {
+  background: #f5f6ff;
+  color: #6366f1;
+  border: 1px solid #c7d2fe;
+}
+
+/* ── Learn Mode — Question Card pill ─────────────────────────────── */
+
+.learnModePill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--r-full);
+  background: #f0fdfc;
+  color: #0d9488;
+  border: 1px solid #99f6e4;
+  margin-left: auto;
+}
+
+/* ── Learn Mode — Option States ──────────────────────────────────── */
+
+.optLearnCorrect {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  border-radius: var(--r-lg);
+  padding: 1rem 1.1rem;
+  text-align: left;
+  font-size: 0.925rem;
+  width: 100%;
+  font-family: inherit;
+  background: #f0fdfc;
+  border: 1.5px solid #a7f3d0;
+  color: #0d9488;
+  font-weight: 600;
+  cursor: default;
+  pointer-events: none;
+}
+
+.optLearnWrong {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  border-radius: var(--r-lg);
+  padding: 1rem 1.1rem;
+  text-align: left;
+  font-size: 0.925rem;
+  width: 100%;
+  font-family: inherit;
+  background: #fff5f5;
+  border: 1.5px solid #fed7d7;
+  color: #c53030;
+  font-weight: 600;
+  cursor: default;
+  pointer-events: none;
+}
+
+.optLearnDimmed {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  border-radius: var(--r-lg);
+  padding: 1rem 1.1rem;
+  text-align: left;
+  font-size: 0.925rem;
+  width: 100%;
+  font-family: inherit;
+  background: var(--gray-50);
+  border: 1.5px solid transparent;
+  color: var(--gray-400);
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.optMark {
+  margin-left: auto;
+  font-weight: 800;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+/* ── Learn Mode — Explanation Box ────────────────────────────────── */
+
+.learnExplanation {
+  background: #fafaf9;
+  border: 1px solid #e7e5e4;
+  border-left: 4px solid #78716c;
+  border-radius: var(--r-lg);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: fadeInUp 0.25s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.learnExplLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #78716c;
+}
+
+.learnExplanation p {
+  font-size: 0.9rem;
+  color: var(--gray-700);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Learn Mode — Pre-answer prompt ──────────────────────────────── */
+
+.learnPrompt {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  margin-top: -0.75rem;
+}
+
+/* ── Sidebar — Wrong answer (learn mode) ─────────────────────────── */
+
+.navWrong {
+  background: #fff5f5;
+  border-color: #fed7d7;
+  color: #c53030;
+}
+
+.dotWrong {
+  background: #fc8181;
+}

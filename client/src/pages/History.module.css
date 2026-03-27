@@ -1,0 +1,240 @@
+.page {
+  min-height: calc(100vh - var(--nav-h));
+  background: #f3f6fa;
+}
+
+.header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  margin: 0;
+}
+
+.summaryRow {
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.summaryCard {
+  background: #ffffff;
+  border-radius: var(--r-xl);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.06);
+  padding: 1rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 120px;
+}
+
+.summaryNum {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.summaryLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.error {
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+  padding: 0 1.5rem;
+  color: var(--red-600);
+  font-size: 0.9rem;
+}
+
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+
+.tableWrap {
+  background: #ffffff;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: 0 2px 16px 0 rgb(0 0 0 / 0.07);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table th {
+  background: var(--gray-50);
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.table td {
+  padding: 0.95rem 1.25rem;
+  border-bottom: 1px solid var(--gray-50);
+  color: var(--gray-700);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background: var(--blue-50);
+}
+
+.topicCell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.topicAccent {
+  display: inline-block;
+  width: 4px;
+  height: 2rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.topicIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.topicName {
+  font-weight: 600;
+  color: var(--gray-900);
+  font-size: 0.9rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--r-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.badgeGreen {
+  background: var(--green-100);
+  color: var(--green-700);
+}
+
+.badgeYellow {
+  background: var(--amber-100);
+  color: var(--amber-600);
+}
+
+.badgeRed {
+  background: var(--red-100);
+  color: var(--red-600);
+}
+
+.badgeGray {
+  background: var(--gray-100);
+  color: var(--gray-500);
+}
+
+.correctCell {
+  font-weight: 600;
+  color: var(--gray-700);
+  font-variant-numeric: tabular-nums;
+}
+
+.dateCell {
+  color: var(--gray-500);
+  font-size: 0.85rem;
+}
+
+.reviewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--brand-blue);
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-decoration: none;
+  padding: 0.3rem 0.75rem;
+  border: 1.5px solid var(--blue-200);
+  border-radius: var(--r);
+  background: var(--blue-50);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.reviewLink:hover {
+  background: var(--blue-100);
+  border-color: var(--blue-600);
+}
+
+.emptyState {
+  text-align: center;
+  color: var(--gray-400);
+  padding: 4rem 2rem;
+  background: #ffffff;
+  border: 2px dashed var(--gray-200);
+  border-radius: var(--r-xl);
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.emptyState p {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+}
+
+.startLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--blue-50);
+  color: var(--brand-blue);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--r);
+  border: 1.5px solid var(--blue-200);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.startLink:hover {
+  background: var(--blue-100);
+  border-color: var(--blue-600);
+  color: var(--brand-blue);
+  text-decoration: none;
+}
