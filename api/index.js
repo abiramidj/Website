@@ -1,7 +1,6 @@
 module.exports = async (req, res) => {
   try {
-    req.url = '/api' + req.url;
-    console.log('[fn] url:', req.url, 'method:', req.method);
+    console.log('[fn]', req.method, req.url);
     const { default: app } = await import('../server/index.js');
     app(req, res);
   } catch (err) {
