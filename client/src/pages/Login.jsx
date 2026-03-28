@@ -72,8 +72,8 @@ export default function Login() {
           </ul>
 
           <div className={styles.panelStats}>
-            <div className={styles.panelStat}><span>200+</span>Questions</div>
-            <div className={styles.panelStat}><span>3</span>Topics</div>
+            <div className={styles.panelStat}><span>2000+</span>Questions</div>
+            <div className={styles.panelStat}><span>50+</span>Topics</div>
             <div className={styles.panelStat}><span>Pro</span>Subscription</div>
           </div>
 
