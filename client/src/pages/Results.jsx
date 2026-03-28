@@ -41,7 +41,7 @@ export default function Results() {
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.errorBox}>{error}</div>
-          <Link to="/dashboard" className={styles.backBtn}>← Back to Dashboard</Link>
+          <Link to="/topics" className={styles.backBtn}>← Back to Quiz</Link>
         </div>
       </div>
     );
@@ -83,7 +83,7 @@ export default function Results() {
                 </div>
               </div>
 
-              <Link to="/dashboard" className={styles.backBtn}>← Back to Dashboard</Link>
+              <Link to="/topics" className={styles.backBtn}>← Back to Quiz</Link>
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function Results() {
         </section>
 
         <div className={styles.bottomNav}>
-          <Link to="/dashboard" className={styles.backBtn}>← Back to Dashboard</Link>
+          <Link to="/topics" className={styles.backBtn}>← Back to Quiz</Link>
         </div>
       </div>
     </div>

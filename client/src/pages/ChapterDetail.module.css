@@ -83,6 +83,21 @@
   color: #94a3b8;
 }
 
+.pdfBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1.1rem;
+  background: #1d4ed8;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.pdfBtn:hover { background: #1e40af; }
+
 /* Content */
 .contentWrap {
   max-width: 760px;

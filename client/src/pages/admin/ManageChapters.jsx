@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth.jsx';
-import { getAdminChapters, createChapter, updateChapter, deleteChapter } from '../../lib/api.js';
+import { useAuth, supabase } from '../../hooks/useAuth.jsx';
+import { getAdminChapters, createChapter, updateChapter, deleteChapter, uploadChapterPdf } from '../../lib/api.js';
 import styles from './ManageChapters.module.css';
 
 const DOMAINS = ['Breast Cancer', 'GI Tumors', 'Surgical Techniques'];
@@ -11,7 +11,8 @@ const EMPTY_FORM = {
 };
 
 function ChapterForm({ initial, onSave, onCancel, saving }) {
-  const [form, setForm] = useState(initial || EMPTY_FORM);
+  const [form, setForm] = useState({ ...EMPTY_FORM, ...(initial || {}) });
+  const [pdfFile, setPdfFile] = useState(null);
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
   return (
@@ -63,6 +64,22 @@ function ChapterForm({ initial, onSave, onCancel, saving }) {
         <span className={styles.hint}>{form.content.length} characters · {form.content.split('\n').length} lines</span>
       </div>
 
+      <div className={styles.field}>
+        <label className={styles.label}>Chapter PDF (optional)</label>
+        {initial?.pdf_url && !pdfFile && (
+          <p className={styles.hint}>
+            Current: <a href={initial.pdf_url} target="_blank" rel="noopener noreferrer">View PDF</a>
+          </p>
+        )}
+        <input
+          type="file"
+          accept="application/pdf"
+          className={styles.input}
+          onChange={e => setPdfFile(e.target.files[0] || null)}
+        />
+        {pdfFile && <span className={styles.hint}>Selected: {pdfFile.name}</span>}
+      </div>
+
       <div className={styles.formFooter}>
         <label className={styles.toggle}>
           <input type="checkbox" checked={form.published} onChange={e => set('published', e.target.checked)} />
@@ -72,7 +89,7 @@ function ChapterForm({ initial, onSave, onCancel, saving }) {
         </label>
         <div className={styles.formActions}>
           <button className={styles.cancelBtn} onClick={onCancel} disabled={saving}>Cancel</button>
-          <button className={styles.saveBtn} onClick={() => onSave(form)} disabled={saving || !form.title.trim()}>
+          <button className={styles.saveBtn} onClick={() => onSave(form, pdfFile)} disabled={saving || !form.title.trim()}>
             {saving ? 'Saving…' : initial ? 'Save changes' : 'Create chapter'}
           </button>
         </div>
@@ -105,17 +122,22 @@ export default function ManageChapters() {
 
   useEffect(() => { load(); }, []);
 
-  async function handleSave(form) {
+  async function handleSave(form, pdfFile) {
     setSaving(true);
     setSaveErr('');
     try {
-      if (editing) {
-        const updated = await updateChapter(editing.id, form, getToken);
-        setChapters(chs => chs.map(c => c.id === updated.id ? updated : c));
-      } else {
-        const created = await createChapter(form, getToken);
-        setChapters(chs => [...chs, created]);
+      let saved = editing
+        ? await updateChapter(editing.id, form, getToken)
+        : await createChapter(form, getToken);
+
+      if (pdfFile) {
+        const pdf_url = await uploadChapterPdf(saved.id, pdfFile, supabase);
+        saved = await updateChapter(saved.id, { pdf_url }, getToken);
       }
+
+      setChapters(chs => editing
+        ? chs.map(c => c.id === saved.id ? saved : c)
+        : [...chs, saved]);
       setMode('list');
       setEditing(null);
     } catch (err) {

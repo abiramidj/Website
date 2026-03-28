@@ -147,6 +147,17 @@ export default function Chapters() {
                         </span>
                       )}
                       {ch.excerpt && <p className={styles.cardExcerpt}>{ch.excerpt}</p>}
+                      {ch.pdf_url && (
+                        <a
+                          href={ch.pdf_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.pdfLink}
+                          onClick={e => e.stopPropagation()}
+                        >
+                          Download PDF
+                        </a>
+                      )}
                     </div>
                     <button
                       className={`${styles.bookmarkBtn} ${bookmarks.has(ch.id) ? styles.bookmarkActive : ''}`}

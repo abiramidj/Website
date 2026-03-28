@@ -160,6 +160,9 @@ create index if not exists chapters_domain_idx on chapters(domain);
 create index if not exists chapters_published_idx on chapters(published);
 create index if not exists chapters_slug_idx on chapters(slug);
 
+-- Migration: run if table already exists
+-- alter table chapters add column if not exists pdf_url text;
+
 alter table chapters enable row level security;
 
 create policy "Published chapters visible to authenticated users"

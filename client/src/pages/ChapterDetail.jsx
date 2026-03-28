@@ -113,6 +113,11 @@ export default function ChapterDetail() {
               year: 'numeric', month: 'long', day: 'numeric',
             })}
           </p>
+          {chapter.pdf_url && (
+            <a href={chapter.pdf_url} target="_blank" rel="noopener noreferrer" className={styles.pdfBtn}>
+              Download PDF
+            </a>
+          )}
         </div>
       </div>
 

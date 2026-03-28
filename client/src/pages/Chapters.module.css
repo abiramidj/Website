@@ -203,6 +203,20 @@
   letter-spacing: 0.04em;
 }
 
+.pdfLink {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1d4ed8;
+  text-decoration: none;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  background: #eff6ff;
+}
+.pdfLink:hover { background: #dbeafe; }
+
 .cardExcerpt {
   font-size: 0.8rem;
   color: #64748b;

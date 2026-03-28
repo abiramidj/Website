@@ -193,6 +193,18 @@ export function deleteChapter(id, getToken) {
   return authFetch(`/chapters/${id}`, { method: 'DELETE' }, getToken);
 }
 
+export async function uploadChapterPdf(id, file, supabase) {
+  const path = `${id}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+  const { error } = await supabase.storage
+    .from('chapter-pdfs')
+    .upload(path, file, { contentType: 'application/pdf', upsert: true });
+  if (error) throw new Error(error.message);
+  const { data: { publicUrl } } = supabase.storage
+    .from('chapter-pdfs')
+    .getPublicUrl(path);
+  return publicUrl;
+}
+
 // ── Import ────────────────────────────────────────────────────────────
 export function importQuestions(questions, getToken) {
   return authFetch('/import', {

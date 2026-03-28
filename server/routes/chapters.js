@@ -43,7 +43,7 @@ router.get('/', requireAuth, async (req, res) => {
     const { domain } = req.query;
     let query = supabaseAdmin
       .from('chapters')
-      .select('id, title, slug, excerpt, domain, subtopic, order_index, created_at')
+      .select('id, title, slug, excerpt, domain, subtopic, order_index, pdf_url, created_at')
       .eq('published', true)
       .order('domain')
       .order('order_index');
@@ -63,7 +63,7 @@ router.get('/admin/all', requireAdmin, async (req, res) => {
   try {
     const { data, error } = await supabaseAdmin
       .from('chapters')
-      .select('id, title, slug, excerpt, domain, subtopic, order_index, published, created_at')
+      .select('id, title, slug, excerpt, content, domain, subtopic, order_index, published, pdf_url, created_at')
       .order('domain')
       .order('order_index');
     if (error) throw error;
@@ -122,7 +122,7 @@ router.post('/', requireAdmin, async (req, res) => {
 // ── PATCH /api/chapters/:id — update chapter (admin) ──────────────────────
 router.patch('/:id', requireAdmin, async (req, res) => {
   try {
-    const allowed = ['title', 'excerpt', 'content', 'domain', 'subtopic', 'order_index', 'published'];
+    const allowed = ['title', 'excerpt', 'content', 'domain', 'subtopic', 'order_index', 'published', 'pdf_url'];
     const updates = {};
     for (const key of allowed) {
       if (req.body[key] !== undefined) updates[key] = req.body[key];
@@ -143,6 +143,30 @@ router.patch('/:id', requireAdmin, async (req, res) => {
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// ── POST /api/chapters/:id/pdf-upload-url — get signed upload URL (admin) ──
+router.post('/:id/pdf-upload-url', requireAdmin, async (req, res, next) => {
+  try {
+    const { filename } = req.body;
+    if (!filename) return res.status(400).json({ error: 'filename is required' });
+
+    const path = `${req.params.id}/${Date.now()}-${filename.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+
+    const { data, error } = await supabaseAdmin.storage
+      .from('chapter-pdfs')
+      .createSignedUploadUrl(path);
+
+    if (error) throw error;
+
+    const { data: { publicUrl } } = supabaseAdmin.storage
+      .from('chapter-pdfs')
+      .getPublicUrl(path);
+
+    res.json({ signedUrl: data.signedUrl, path, publicUrl });
+  } catch (err) {
+    next(err);
   }
 });
 
