@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const API_BASE = (import.meta.env.VITE_API_URL || '') + '/api';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -19,7 +20,7 @@ export function AuthProvider({ children }) {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session?.access_token) return null;
 
-      const res = await fetch('/api/auth/profile', {
+      const res = await fetch(`${API_BASE}/auth/profile`, {
         headers: { Authorization: `Bearer ${session.access_token}` },
       });
       if (!res.ok) return null;
