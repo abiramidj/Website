@@ -1,4 +1,4 @@
-const BASE = (import.meta.env.VITE_API_URL || '') + '/api';
+const BASE = (import.meta.env.VITE_API_URL || window.location.origin) + '/api';
 
 async function authFetch(url, options = {}, getToken) {
   const token = await getToken();
