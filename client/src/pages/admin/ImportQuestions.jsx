@@ -84,6 +84,8 @@ export default function ImportQuestions() {
       if (tab === 'json') {
         rows = JSON.parse(jsonText);
         if (!Array.isArray(rows)) throw new Error('JSON must be an array of question objects');
+      } else {
+        rows = parseCsv(jsonText);
       }
       if (!rows || rows.length === 0) throw new Error('No questions found');
       setParsed(rows);

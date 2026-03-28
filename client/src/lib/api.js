@@ -10,7 +10,12 @@ async function authFetch(url, options = {}, getToken) {
 
   const res = await fetch(`${BASE}${url}`, { ...options, headers });
   const data = await res.json().catch(() => ({ error: 'Invalid JSON response' }));
-  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  if (!res.ok) {
+    const msg = data.details?.length
+      ? `${data.error}:\n• ${data.details.join('\n• ')}`
+      : (data.error || `HTTP ${res.status}`);
+    throw new Error(msg);
+  }
   return data;
 }
 

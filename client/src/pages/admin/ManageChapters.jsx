@@ -3,7 +3,6 @@ import { useAuth, supabase } from '../../hooks/useAuth.jsx';
 import { getAdminChapters, createChapter, updateChapter, deleteChapter, uploadChapterPdf } from '../../lib/api.js';
 import styles from './ManageChapters.module.css';
 
-const DOMAINS = ['Breast Cancer', 'GI Tumors', 'Surgical Techniques'];
 
 const EMPTY_FORM = {
   title: '', excerpt: '', content: '', domain: 'Breast Cancer',
@@ -25,9 +24,8 @@ function ChapterForm({ initial, onSave, onCancel, saving }) {
         </div>
         <div className={styles.field}>
           <label className={styles.label}>Domain</label>
-          <select className={styles.input} value={form.domain} onChange={e => set('domain', e.target.value)}>
-            {DOMAINS.map(d => <option key={d}>{d}</option>)}
-          </select>
+          <input className={styles.input} value={form.domain}
+            onChange={e => set('domain', e.target.value)} placeholder="e.g. Breast Cancer" />
         </div>
         <div className={styles.field} style={{ maxWidth: 160 }}>
           <label className={styles.label}>Subtopic</label>

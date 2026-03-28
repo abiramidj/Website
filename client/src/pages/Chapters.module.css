@@ -79,6 +79,23 @@
   flex-wrap: wrap;
 }
 
+.filterSelect {
+  background: var(--gray-50);
+  border: 1.5px solid var(--gray-200);
+  color: var(--gray-700);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--r);
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 160px;
+}
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+}
+
 .filterBtn {
   background: var(--gray-50);
   border: 1.5px solid var(--gray-200);

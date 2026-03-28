@@ -95,17 +95,15 @@ export default function Chapters() {
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
-          <div className={styles.filters}>
+          <select
+            className={styles.filterSelect}
+            value={filter}
+            onChange={e => setFilter(e.target.value)}
+          >
             {DOMAINS.map(d => (
-              <button
-                key={d}
-                className={`${styles.filterBtn} ${filter === d ? styles.filterActive : ''}`}
-                onClick={() => setFilter(d)}
-              >
-                {d}
-              </button>
+              <option key={d} value={d}>{d}</option>
             ))}
-          </div>
+          </select>
         </div>
 
         {error && <div className={styles.error}>{error}</div>}
