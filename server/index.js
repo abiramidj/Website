@@ -13,6 +13,7 @@ import chaptersRouter from './routes/chapters.js';
 import paymentsRouter from './routes/payments.js';
 
 const app = express();
+app.set('etag', false);
 const PORT = process.env.PORT || 3001;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
