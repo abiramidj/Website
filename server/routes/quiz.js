@@ -3,7 +3,6 @@ import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
 
 const router = Router();
 
-const TOPICS = ['Breast Cancer', 'GI Tumors', 'Surgical Techniques'];
 const QUIZ_SIZE = 20;
 
 // Auth middleware
@@ -53,7 +52,7 @@ router.get('/topics', requireAuth, async (req, res) => {
       progressByTopic[p.topic] = p;
     }
 
-    const topics = TOPICS.map(topic => ({
+    const topics = Object.keys(countByDomain).sort().map(topic => ({
       topic,
       questionCount: countByDomain[topic] || 0,
       attemptCount: progressByTopic[topic]?.attempt_count || 0,
@@ -76,8 +75,8 @@ router.post('/start', requireAuth, async (req, res) => {
     const { topic, subtopic } = req.body;
     const userId = req.user.id;
 
-    if (!TOPICS.includes(topic)) {
-      return res.status(400).json({ error: `Invalid topic. Must be one of: ${TOPICS.join(', ')}` });
+    if (!topic?.trim()) {
+      return res.status(400).json({ error: 'topic is required' });
     }
 
     // Get all approved questions for this topic (optionally filtered by subtopic)
@@ -155,8 +154,8 @@ router.post('/submit', requireAuth, async (req, res) => {
     const { topic, questionIds, answers } = req.body;
     const userId = req.user.id;
 
-    if (!TOPICS.includes(topic)) {
-      return res.status(400).json({ error: 'Invalid topic' });
+    if (!topic?.trim()) {
+      return res.status(400).json({ error: 'topic is required' });
     }
     if (!Array.isArray(questionIds) || !Array.isArray(answers)) {
       return res.status(400).json({ error: 'questionIds and answers must be arrays' });

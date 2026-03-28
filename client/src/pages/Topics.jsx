@@ -20,6 +20,7 @@ export default function Topics() {
   const [error, setError] = useState('');
   const [savedProgress, setSavedProgress] = useState({});
   const [subtopicsOpen, setSubtopicsOpen] = useState({});
+  const [domainFilter, setDomainFilter] = useState('');
 
   const totalAttempts = attempts.length;
   const bestScore = attempts.length ? Math.max(...attempts.map(a => a.score ?? 0)) : null;
@@ -60,6 +61,16 @@ export default function Topics() {
           <h1 className={styles.title}>Quiz Topics</h1>
           <p className={styles.subtitle}>{topics.length} topic{topics.length !== 1 ? 's' : ''} available — choose a topic to start</p>
         </div>
+        <select
+          className={styles.domainFilter}
+          value={domainFilter}
+          onChange={e => setDomainFilter(e.target.value)}
+        >
+          <option value="">All Domains</option>
+          {topics.map(t => (
+            <option key={t.topic} value={t.topic}>{t.topic}</option>
+          ))}
+        </select>
       </div>
 
       <div className={styles.statsRow}>
@@ -80,7 +91,7 @@ export default function Topics() {
       {error && <div className={styles.error}>{error}</div>}
 
       <div className={styles.topicsGrid}>
-        {topics.map(t => {
+        {topics.filter(t => !domainFilter || t.topic === domainFilter).map(t => {
           const meta = TOPIC_META[t.topic] || DEFAULT_META;
           return (
             <div key={t.topic} className={styles.topicCard}>

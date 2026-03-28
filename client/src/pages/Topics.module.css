@@ -28,6 +28,23 @@
   margin: 0;
 }
 
+.domainFilter {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 180px;
+}
+.domainFilter:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+}
+
 .statsRow {
   max-width: 1100px;
   margin: 0 auto 1.25rem;
