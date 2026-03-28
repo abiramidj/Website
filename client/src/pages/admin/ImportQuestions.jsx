@@ -1,11 +1,7 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth.jsx';
-import { importQuestions } from '../../lib/api.js';
+import { importQuestions, getDomains } from '../../lib/api.js';
 import styles from './ImportQuestions.module.css';
-
-const DOMAINS     = ['Breast Cancer', 'GI Tumors', 'Surgical Techniques'];
-const DIFFICULTIES = ['easy', 'medium', 'hard'];
-const LEVELS      = ['medical_student', 'resident', 'fellow', 'attending'];
 
 const LEVEL_LABELS = {
   medical_student: 'Med Student',
@@ -31,8 +27,7 @@ function parseCsv(text) {
   const lines = text.trim().split('\n').filter(Boolean);
   if (lines.length < 2) throw new Error('CSV must have a header row and at least one data row');
   const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-  return lines.slice(1).map((line, i) => {
-    // Simple CSV parse (handles quoted fields)
+  return lines.slice(1).map((line) => {
     const cols = [];
     let cur = '', inQ = false;
     for (let c = 0; c < line.length; c++) {
@@ -62,19 +57,30 @@ export default function ImportQuestions() {
   const { getToken } = useAuth();
   const fileRef = useRef(null);
 
-  const [tab, setTab]           = useState('json'); // 'json' | 'csv'
-  const [jsonText, setJsonText] = useState('');
-  const [parsed, setParsed]     = useState(null);   // validated rows ready to submit
+  const [tab, setTab]               = useState('json');
+  const [jsonText, setJsonText]     = useState('');
+  const [parsed, setParsed]         = useState(null);
   const [parseError, setParseError] = useState('');
-  const [result, setResult]     = useState(null);   // { inserted, questions }
+  const [result, setResult]         = useState(null);
   const [submitError, setSubmitError] = useState('');
-  const [loading, setLoading]   = useState(false);
+  const [loading, setLoading]       = useState(false);
+  const [domains, setDomains]       = useState([]);
+  const [domainOverride, setDomainOverride] = useState('');
+  const [customDomain, setCustomDomain]     = useState('');
+
+  useEffect(() => {
+    getDomains(getToken)
+      .then(setDomains)
+      .catch(() => {}); // non-fatal — domains list is optional
+  }, []);
 
   function reset() {
     setParsed(null);
     setParseError('');
     setResult(null);
     setSubmitError('');
+    setDomainOverride('');
+    setCustomDomain('');
   }
 
   function handleParse() {
@@ -122,8 +128,14 @@ export default function ImportQuestions() {
     if (!parsed?.length) return;
     setSubmitError('');
     setLoading(true);
+
+    const effectiveDomain = domainOverride === '__custom__' ? customDomain.trim() : domainOverride;
+    const questions = effectiveDomain
+      ? parsed.map(q => ({ ...q, domain: effectiveDomain }))
+      : parsed;
+
     try {
-      const data = await importQuestions(parsed, getToken);
+      const data = await importQuestions(questions, getToken);
       setResult(data);
       setParsed(null);
       setJsonText('');
@@ -139,6 +151,8 @@ export default function ImportQuestions() {
     setJsonText(TEMPLATE_JSON);
     reset();
   }
+
+  const effectiveDomain = domainOverride === '__custom__' ? customDomain.trim() : domainOverride;
 
   return (
     <div className={styles.page}>
@@ -175,7 +189,7 @@ export default function ImportQuestions() {
 Breast Cancer,Staging,medium,resident,"Question…",A,B,C,D,1,"Explanation…"`}</pre>
           <p className={styles.guideNote}>
             <strong>correct</strong> = 0-indexed (0=A, 1=B, 2=C, 3=D).<br />
-            Domains: <em>Breast Cancer</em>, <em>GI Tumors</em>, <em>Surgical Techniques</em>
+            You can override the domain for all questions using the selector below.
           </p>
         </div>
       </div>
@@ -243,7 +257,40 @@ Breast Cancer,Staging,medium,resident,"Question…",A,B,C,D,1,"Explanation…"`}
             </div>
           </div>
 
-          {submitError && <div className={styles.errorBox}>{submitError}</div>}
+          {/* Domain override */}
+          <div className={styles.domainOverrideRow}>
+            <label className={styles.domainOverrideLabel}>
+              Assign all questions to domain:
+            </label>
+            <select
+              className={styles.domainOverrideSelect}
+              value={domainOverride}
+              onChange={e => { setDomainOverride(e.target.value); setCustomDomain(''); }}
+            >
+              <option value="">— keep domain from file —</option>
+              {domains.map(d => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+              <option value="__custom__">+ Enter custom domain…</option>
+            </select>
+            {domainOverride === '__custom__' && (
+              <input
+                className={styles.domainCustomInput}
+                placeholder="Type domain name…"
+                value={customDomain}
+                onChange={e => setCustomDomain(e.target.value)}
+              />
+            )}
+            {effectiveDomain && (
+              <span className={styles.domainOverrideBadge}>
+                All questions → <strong>{effectiveDomain}</strong>
+              </span>
+            )}
+          </div>
+
+          {submitError && (
+            <div className={styles.errorBox} style={{ whiteSpace: 'pre-line' }}>{submitError}</div>
+          )}
 
           <div className={styles.tableWrap}>
             <table className={styles.table}>
@@ -260,7 +307,8 @@ Breast Cancer,Staging,medium,resident,"Question…",A,B,C,D,1,"Explanation…"`}
               </thead>
               <tbody>
                 {parsed.map((q, i) => {
-                  const validDomain = DOMAINS.includes(q.domain);
+                  const displayDomain = effectiveDomain || q.domain;
+                  const validDomain = !!displayDomain;
                   const validCorrect = !isNaN(parseInt(q.correct, 10)) && q.correct >= 0 && q.correct <= 3;
                   const hasIssue = !validDomain || !q.question || !validCorrect ||
                     !Array.isArray(q.options) || q.options.length !== 4;
@@ -268,9 +316,12 @@ Breast Cancer,Staging,medium,resident,"Question…",A,B,C,D,1,"Explanation…"`}
                     <tr key={i} className={hasIssue ? styles.rowError : ''}>
                       <td className={styles.tdNum}>{i + 1}</td>
                       <td>
-                        <span className={`${styles.domainBadge} ${validDomain ? styles[`domain${q.domain.replace(/\s+/g, '')}`] : styles.domainInvalid}`}>
-                          {q.domain || '—'}
+                        <span className={`${styles.domainBadge} ${validDomain ? styles.domainValid : styles.domainInvalid}`}>
+                          {displayDomain || '—'}
                         </span>
+                        {effectiveDomain && q.domain && q.domain !== effectiveDomain && (
+                          <span className={styles.domainOriginal} title={`Original: ${q.domain}`}>↩</span>
+                        )}
                       </td>
                       <td className={styles.tdSub}>{q.subtopic || <em className={styles.empty}>—</em>}</td>
                       <td>

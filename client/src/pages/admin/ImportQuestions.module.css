@@ -296,6 +296,56 @@
 .domainGITumors         { background: #ccfbf1; color: #0f766e; }
 .domainSurgicalTechniques { background: #e0e7ff; color: #4338ca; }
 .domainInvalid          { background: #fee2e2; color: #b91c1c; }
+.domainValid            { background: #e0e7ff; color: #3730a3; }
+.domainOriginal         { font-size: 0.7rem; color: #94a3b8; margin-left: 0.25rem; cursor: default; }
+
+/* Domain override row */
+.domainOverrideRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.25rem;
+  background: #f0f9ff;
+  border-bottom: 1px solid #bae6fd;
+}
+.domainOverrideLabel {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0369a1;
+  white-space: nowrap;
+}
+.domainOverrideSelect {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: #fff;
+  border: 1.5px solid #7dd3fc;
+  border-radius: 7px;
+  padding: 0.35rem 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 220px;
+}
+.domainOverrideSelect:focus { outline: none; border-color: #0284c7; }
+.domainCustomInput {
+  font-size: 0.82rem;
+  padding: 0.35rem 0.75rem;
+  border: 1.5px solid #7dd3fc;
+  border-radius: 7px;
+  font-family: inherit;
+  min-width: 180px;
+  outline: none;
+}
+.domainCustomInput:focus { border-color: #0284c7; }
+.domainOverrideBadge {
+  font-size: 0.78rem;
+  color: #0369a1;
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  border-radius: 20px;
+  padding: 0.2rem 0.65rem;
+}
 
 /* Difficulty badges */
 .diffBadge {

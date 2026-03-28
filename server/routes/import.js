@@ -3,10 +3,14 @@ import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
 
 const router = Router();
 
-const VALID_DOMAINS   = ['Breast Cancer', 'GI Tumors', 'Surgical Techniques'];
 const VALID_DIFF      = ['easy', 'medium', 'hard'];
 const VALID_LEVELS    = ['medical_student', 'resident', 'fellow', 'attending'];
-const DOMAIN_PREFIX   = { 'Breast Cancer': 'BC', 'GI Tumors': 'GI', 'Surgical Techniques': 'ST' };
+
+function domainPrefix(domain) {
+  const words = domain.trim().split(/\s+/);
+  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+  return domain.substring(0, 2).toUpperCase();
+}
 
 async function requireAdmin(req, res, next) {
   try {
@@ -23,7 +27,7 @@ async function requireAdmin(req, res, next) {
 
 // Generate a unique ID for a domain: BC-XXXXX-NNNN
 async function generateId(domain) {
-  const prefix = DOMAIN_PREFIX[domain] || 'XX';
+  const prefix = domainPrefix(domain) || 'XX';
   const rand   = Math.random().toString(36).substring(2, 7).toUpperCase();
   const seq    = String(Math.floor(Math.random() * 9000) + 1000);
   return `${prefix}-${rand}-${seq}`;
@@ -31,8 +35,8 @@ async function generateId(domain) {
 
 function validateRow(row, index) {
   const errors = [];
-  if (!VALID_DOMAINS.includes(row.domain))
-    errors.push(`row ${index + 1}: invalid domain "${row.domain}"`);
+  if (!row.domain?.trim())
+    errors.push(`row ${index + 1}: domain is required`);
   if (!row.question || typeof row.question !== 'string' || !row.question.trim())
     errors.push(`row ${index + 1}: question is required`);
   if (!Array.isArray(row.options) || row.options.length !== 4 || row.options.some(o => !o?.toString().trim()))

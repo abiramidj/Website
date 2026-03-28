@@ -83,6 +83,25 @@ router.get('/stats', requireAdmin, async (req, res) => {
   }
 });
 
+// GET /domains — list all known domains (from questions + chapters)
+router.get('/domains', requireAdmin, async (req, res) => {
+  try {
+    const [q, c] = await Promise.all([
+      supabaseAdmin.from('questions').select('domain').not('domain', 'is', null),
+      supabaseAdmin.from('chapters').select('domain').not('domain', 'is', null),
+    ]);
+    if (q.error) throw q.error;
+    if (c.error) throw c.error;
+    const set = new Set([
+      ...q.data.map(r => r.domain).filter(Boolean),
+      ...c.data.map(r => r.domain).filter(Boolean),
+    ]);
+    res.json([...set].sort());
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // PATCH /:id — update a question
 router.patch('/:id', requireAdmin, async (req, res) => {
   try {

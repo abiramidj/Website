@@ -210,6 +210,11 @@ export async function uploadChapterPdf(id, file, supabase) {
   return publicUrl;
 }
 
+// ── Domains ───────────────────────────────────────────────────────────
+export function getDomains(getToken) {
+  return authFetch('/questions/domains', {}, getToken);
+}
+
 // ── Import ────────────────────────────────────────────────────────────
 export function importQuestions(questions, getToken) {
   return authFetch('/import', {
