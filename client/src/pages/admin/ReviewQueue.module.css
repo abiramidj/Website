@@ -321,6 +321,26 @@
   cursor: not-allowed;
 }
 
+.deleteBtn {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #c2410c;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.15s;
+}
+.deleteBtn:hover { background: #ffedd5; }
+
+.bulkDelete {
+  background: #fff7ed;
+  color: #c2410c;
+  border-color: #fed7aa;
+}
+.bulkDelete:hover:not(:disabled) { background: #ffedd5; }
+
 /* Pagination */
 .pagination {
   display: flex;

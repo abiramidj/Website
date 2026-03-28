@@ -161,4 +161,45 @@ router.patch('/bulk/update', requireAdmin, async (req, res) => {
   }
 });
 
+// DELETE /bulk/delete — bulk delete rejected questions (must be before /:id)
+router.delete('/bulk/delete', requireAdmin, async (req, res) => {
+  try {
+    const { ids } = req.body;
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ error: 'ids must be a non-empty array' });
+    }
+
+    const { data, error } = await supabaseAdmin
+      .from('questions')
+      .delete()
+      .in('id', ids)
+      .eq('status', 'rejected')
+      .select('id');
+
+    if (error) throw error;
+    res.json({ deleted: data.length });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE /:id — delete a single rejected question
+router.delete('/:id', requireAdmin, async (req, res) => {
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('questions')
+      .delete()
+      .eq('id', req.params.id)
+      .eq('status', 'rejected')
+      .select('id')
+      .single();
+
+    if (error) throw error;
+    if (!data) return res.status(404).json({ error: 'Question not found or not in rejected status' });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 export default router;

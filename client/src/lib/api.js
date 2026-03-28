@@ -108,6 +108,17 @@ export function bulkUpdateQuestions(ids, status, getToken) {
   }, getToken);
 }
 
+export function deleteQuestion(id, getToken) {
+  return authFetch(`/questions/${id}`, { method: 'DELETE' }, getToken);
+}
+
+export function bulkDeleteQuestions(ids, getToken) {
+  return authFetch('/questions/bulk/delete', {
+    method: 'DELETE',
+    body: JSON.stringify({ ids }),
+  }, getToken);
+}
+
 // ── Generate (SSE) ────────────────────────────────────────────────────
 export async function startGeneration(payload, getToken, onEvent) {
   const token = await getToken();

@@ -4,6 +4,8 @@ import {
   getQuestions,
   updateQuestion,
   bulkUpdateQuestions,
+  deleteQuestion,
+  bulkDeleteQuestions,
 } from '../../lib/api.js';
 import styles from './ReviewQueue.module.css';
 
@@ -117,6 +119,30 @@ export default function ReviewQueue() {
     }
   }
 
+  async function handleDelete(id) {
+    if (!window.confirm('Permanently delete this rejected question? This cannot be undone.')) return;
+    try {
+      await deleteQuestion(id, getToken);
+      setQuestions(prev => prev.filter(q => q.id !== id));
+      setTotal(prev => prev - 1);
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  async function handleBulkDelete() {
+    if (!window.confirm(`Permanently delete ${selected.size} rejected question${selected.size !== 1 ? 's' : ''}? This cannot be undone.`)) return;
+    setBulkLoading(true);
+    try {
+      await bulkDeleteQuestions([...selected], getToken);
+      await load(page);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBulkLoading(false);
+    }
+  }
+
   function openEdit(q) {
     setEditModal(q);
     setEditData({
@@ -195,6 +221,15 @@ export default function ReviewQueue() {
             >
               ✗ Reject All
             </button>
+            {filterStatus === 'rejected' && (
+              <button
+                className={`${styles.bulkBtn} ${styles.bulkDelete}`}
+                onClick={handleBulkDelete}
+                disabled={bulkLoading}
+              >
+                🗑 Delete Selected
+              </button>
+            )}
             <button
               className={styles.bulkClear}
               onClick={() => setSelected(new Set())}
@@ -287,6 +322,15 @@ export default function ReviewQueue() {
                           >
                             ✗
                           </button>
+                          {q.status === 'rejected' && (
+                            <button
+                              className={styles.deleteBtn}
+                              onClick={() => handleDelete(q.id)}
+                              title="Delete permanently"
+                            >
+                              🗑
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>
