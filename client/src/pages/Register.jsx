@@ -248,6 +248,9 @@ export default function Register() {
             By registering you acknowledge this platform is for educational use only.
             Your data is stored securely and never shared with third parties.
           </p>
+          <p className={styles.copyright}>
+            &copy; {new Date().getFullYear()} OncoCliniq. All rights reserved.
+          </p>
         </div>
       </div>
     </div>

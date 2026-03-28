@@ -159,6 +159,9 @@ export default function Login() {
           <p className={styles.disclaimer}>
             Educational platform only. Content does not constitute medical advice or replace clinical judgment.
           </p>
+          <p className={styles.copyright}>
+            &copy; {new Date().getFullYear()} OncoCliniq. All rights reserved.
+          </p>
         </div>
       </div>
     </div>
