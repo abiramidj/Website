@@ -2,6 +2,7 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "client/dist",
+  "installCommand": "npm install && npm install --workspace=client && npm install --workspace=server",
   "builds": [
     {
       "src": "server/index.js",
