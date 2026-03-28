@@ -148,9 +148,9 @@ export default function Dashboard() {
                 <img src="/P1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <div>
-                <p className={styles.aboutAuthorName}>Author Name — MD, FACS</p>
-                <p className={styles.aboutAuthorMeta}>Department of Surgical Oncology · Institution Name</p>
-                <p className={styles.aboutText}>[Author bio placeholder — replace with your content.]</p>
+                <p className={styles.aboutAuthorName}>Dr. Pragatheeshwar Thirunavukarasu (Dr. Prag)</p>
+                <p className={styles.aboutAuthorMeta}>Complex General Surgical Oncology &amp; General Surgery</p>
+                <p className={styles.aboutText}>Dr. Pragatheeshwar Thirunavukarasu, known to many as Dr. Prag, is a board-certified cancer surgeon specializing in Complex General Surgical Oncology and General Surgery. Fellowship-trained in Surgical Oncology and Hepatopancreaticobiliary surgery, he focuses on advanced and complex cancers involving the liver, pancreas, bile ducts, and abdominal cavity. He is especially dedicated to treating challenging conditions such as liver metastases, advanced pancreatic and liver cancers, malignant ascites, and malignant bowel obstruction.</p>
               </div>
             </div>
           </div>
