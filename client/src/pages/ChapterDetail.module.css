@@ -1,6 +1,6 @@
 .page {
   min-height: calc(100vh - var(--nav-h));
-  background: #f3f6fa;
+  background: #f5f5f7;
 }
 
 /* Header */
@@ -107,7 +107,7 @@
 
 /* Article prose styles */
 .article {
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1.8;
   color: #1e293b;
 }
@@ -124,10 +124,10 @@
   margin-bottom: 0.75rem;
 }
 
-.article :global(h1) { font-size: 1.6rem; }
-.article :global(h2) { font-size: 1.3rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.4rem; }
-.article :global(h3) { font-size: 1.1rem; }
-.article :global(h4) { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; color: #475569; }
+.article :global(h1) { font-size: 1.3rem; }
+.article :global(h2) { font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.4rem; }
+.article :global(h3) { font-size: 0.95rem; }
+.article :global(h4) { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: #475569; }
 
 .article :global(p) {
   margin-bottom: 1.25rem;

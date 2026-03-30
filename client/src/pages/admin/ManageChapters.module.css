@@ -62,10 +62,10 @@
 .formCard {
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 16px rgb(0 0 0 / 0.06), 0 1px 4px rgb(0 0 0 / 0.03);
 }
 
 .formRow {
@@ -206,7 +206,7 @@
   border-collapse: collapse;
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   font-size: 0.83rem;
 }

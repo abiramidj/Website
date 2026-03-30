@@ -1,5 +1,5 @@
 .page {
-  background: #f3f6fa;
+  background: #f5f5f7;
   min-height: calc(100vh - var(--nav-h));
   padding: 2rem 0 3rem;
 }
