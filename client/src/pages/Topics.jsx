@@ -4,12 +4,6 @@ import { useAuth } from '../hooks/useAuth.jsx';
 import { getTopics, getAttempts } from '../lib/api.js';
 import styles from './Topics.module.css';
 
-const TOPIC_META = {
-  'Breast Cancer':       { icon: '🩺', accent: 'linear-gradient(90deg,#fda4af,#fb7185)', iconBg: '#fff1f2', btnBg: '#ffe4e6', btnColor: '#be123c' },
-  'GI Tumors':           { icon: '🔬', accent: 'linear-gradient(90deg,#99f6e4,#5eead4)', iconBg: '#f0fdfc', btnBg: '#ccfbf1', btnColor: '#0f766e' },
-  'Surgical Techniques': { icon: '🏥', accent: 'linear-gradient(90deg,#c7d2fe,#a5b4fc)', iconBg: '#f5f6ff', btnBg: '#e0e7ff', btnColor: '#4338ca' },
-};
-const DEFAULT_META = { icon: '📚', accent: 'linear-gradient(90deg,#bae6fd,#7dd3fc)', iconBg: '#f0f9ff', btnBg: '#dbeafe', btnColor: '#1d4ed8' };
 
 export default function Topics() {
   const { getToken } = useAuth();
@@ -92,13 +86,12 @@ export default function Topics() {
 
       <div className={styles.topicsGrid}>
         {topics.filter(t => !domainFilter || t.topic === domainFilter).map(t => {
-          const meta = TOPIC_META[t.topic] || DEFAULT_META;
           return (
             <div key={t.topic} className={styles.topicCard}>
               <div className={styles.topicRow}>
-                <div className={styles.topicAccent} style={{ background: meta.accent }} />
+                <div className={styles.topicAccent} />
                 <div className={styles.topicContent}>
-                  <div className={styles.topicIconWrap} style={{ background: meta.iconBg }}>
+                  <div className={styles.topicIconWrap}>
                     <img src="/quiz_logo.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--r-md)' }} />
                   </div>
                   <div className={styles.topicInfo}>
@@ -127,7 +120,6 @@ export default function Topics() {
                       <div className={styles.modeRow}>
                         <button
                           className={styles.startBtn}
-                          style={{ background: meta.btnBg, color: meta.btnColor, border: `1.5px solid ${meta.btnColor}22` }}
                           onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}?mode=resume`)}
                         >
                           Resume →
