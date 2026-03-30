@@ -404,3 +404,16 @@
   text-decoration: none;
 }
 .reviewLink:hover { text-decoration: underline; }
+
+/* Quiz mode badges in preview table */
+.modeBadge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--r-full);
+  text-transform: capitalize;
+  letter-spacing: 0.03em;
+}
+.mode_both  { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+.mode_learn { background: #f0fdfc; color: #0d9488; border: 1px solid #99f6e4; }
+.mode_test  { background: #f5f6ff; color: #6366f1; border: 1px solid #c7d2fe; }

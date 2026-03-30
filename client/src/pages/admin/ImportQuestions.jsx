@@ -16,6 +16,7 @@ const TEMPLATE_JSON = JSON.stringify([
     subtopic: 'Staging',
     difficulty: 'medium',
     level: 'resident',
+    quiz_mode: 'both',
     question: 'Which TNM stage corresponds to a 2.5 cm tumour with 2 ipsilateral mobile axillary nodes and no distant metastasis?',
     options: ['Stage I', 'Stage IIA', 'Stage IIB', 'Stage IIIA'],
     correct: 1,
@@ -45,6 +46,7 @@ function parseCsv(text) {
       subtopic:    row.subtopic || '',
       difficulty:  row.difficulty || 'medium',
       level:       row.level || 'resident',
+      quiz_mode:   row.quiz_mode || 'both',
       question:    row.question || '',
       options:     [row.option_a, row.option_b, row.option_c, row.option_d],
       correct:     parseInt(row.correct, 10),
@@ -176,6 +178,7 @@ export default function ImportQuestions() {
     "subtopic": "Staging",           // optional
     "difficulty": "easy|medium|hard",
     "level": "medical_student|resident|fellow|attending",
+    "quiz_mode": "both|learn|test",  // optional, default: both
     "question": "Question text…",   // required
     "options": ["A","B","C","D"],   // required, exactly 4
     "correct": 1,                   // required, 0–3 index
@@ -185,10 +188,11 @@ export default function ImportQuestions() {
         </div>
         <div className={styles.guideCol}>
           <h3 className={styles.guideTitle}>CSV format</h3>
-          <pre className={styles.guidePre}>{`domain,subtopic,difficulty,level,question,option_a,option_b,option_c,option_d,correct,explanation
-Breast Cancer,Staging,medium,resident,"Question…",A,B,C,D,1,"Explanation…"`}</pre>
+          <pre className={styles.guidePre}>{`domain,subtopic,difficulty,level,quiz_mode,question,option_a,option_b,option_c,option_d,correct,explanation
+Breast Cancer,Staging,medium,resident,both,"Question…",A,B,C,D,1,"Explanation…"`}</pre>
           <p className={styles.guideNote}>
             <strong>correct</strong> = 0-indexed (0=A, 1=B, 2=C, 3=D).<br />
+            <strong>quiz_mode</strong> = both / learn / test (default: both).<br />
             You can override the domain for all questions using the selector below.
           </p>
         </div>
@@ -301,6 +305,7 @@ Breast Cancer,Staging,medium,resident,"Question…",A,B,C,D,1,"Explanation…"`}
                   <th>Subtopic</th>
                   <th>Difficulty</th>
                   <th>Level</th>
+                  <th>Mode</th>
                   <th>Question</th>
                   <th>Correct answer</th>
                 </tr>
@@ -330,6 +335,11 @@ Breast Cancer,Staging,medium,resident,"Question…",A,B,C,D,1,"Explanation…"`}
                         </span>
                       </td>
                       <td className={styles.tdLevel}>{LEVEL_LABELS[q.level] || q.level || '—'}</td>
+                      <td>
+                        <span className={`${styles.modeBadge} ${styles[`mode_${q.quiz_mode || 'both'}`]}`}>
+                          {q.quiz_mode || 'both'}
+                        </span>
+                      </td>
                       <td className={styles.tdQuestion}>
                         {q.question ? q.question.slice(0, 90) + (q.question.length > 90 ? '…' : '') : <em className={styles.empty}>Missing</em>}
                       </td>

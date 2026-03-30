@@ -89,6 +89,8 @@ router.post('/start', requireAuth, async (req, res) => {
       .select(selectFields)
       .eq('domain', topic)
       .eq('status', 'approved');
+    if (mode === 'learn') query = query.in('quiz_mode', ['learn', 'both']);
+    else if (mode === 'test') query = query.in('quiz_mode', ['test', 'both']);
     if (subtopic) query = query.eq('subtopic', subtopic);
     const { data: allQuestions, error: qErr } = await query;
 

@@ -30,18 +30,19 @@ export default function Topics() {
     if (!topics.length) return;
     const progress = {};
     topics.forEach(t => {
-      const saved = localStorage.getItem(`oncoquiz_${encodeURIComponent(t.topic)}`);
-      if (saved) {
+      const key = encodeURIComponent(t.topic);
+      const checkSaved = (raw, mode) => {
+        if (!raw) return null;
         try {
-          const d = JSON.parse(saved);
-          if (d.questions?.length) {
-            progress[t.topic] = {
-              answered: Object.keys(d.answers || {}).length,
-              total: d.questions.length,
-            };
-          }
+          const d = JSON.parse(raw);
+          if (d.questions?.length) return { answered: Object.keys(d.answers || {}).length, total: d.questions.length, mode };
         } catch {}
-      }
+        return null;
+      };
+      const learnProgress = checkSaved(localStorage.getItem(`oncoquiz_learn_${key}`), 'learn');
+      const testProgress = checkSaved(localStorage.getItem(`oncoquiz_test_${key}`), 'test');
+      if (learnProgress) progress[t.topic] = learnProgress;
+      else if (testProgress) progress[t.topic] = testProgress;
     });
     setSavedProgress(progress);
   }, [topics]);
@@ -115,18 +116,18 @@ export default function Topics() {
                   {savedProgress[t.topic] ? (
                     <div className={styles.topicActions}>
                       <p className={styles.progressHint}>
-                        {savedProgress[t.topic].answered}/{savedProgress[t.topic].total} answered — in progress
+                        {savedProgress[t.topic].answered}/{savedProgress[t.topic].total} answered — {savedProgress[t.topic].mode === 'learn' ? '📖 Learn' : '📝 Test'} in progress
                       </p>
                       <div className={styles.modeRow}>
                         <button
                           className={styles.startBtn}
-                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}?mode=resume`)}
+                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${savedProgress[t.topic].mode}`)}
                         >
                           Resume →
                         </button>
                         <button
                           className={styles.restartBtn}
-                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}`)}
+                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${savedProgress[t.topic].mode}?restart=1`)}
                         >
                           Restart
                         </button>
@@ -136,14 +137,14 @@ export default function Topics() {
                     <div className={styles.modeRow}>
                       <button
                         className={styles.learnBtn}
-                        onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}?quizMode=learn`)}
+                        onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/learn`)}
                         disabled={t.questionCount === 0}
                       >
                         📖 Learn
                       </button>
                       <button
                         className={styles.testBtn}
-                        onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}?quizMode=test`)}
+                        onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/test`)}
                         disabled={t.questionCount === 0}
                       >
                         📝 Test
@@ -173,15 +174,15 @@ export default function Topics() {
                           <div className={styles.subtopicActions}>
                             <button
                               className={styles.learnBtn}
-                              onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}?quizMode=learn&subtopic=${encodeURIComponent(st.subtopic)}`)}
+                              onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/learn?subtopic=${encodeURIComponent(st.subtopic)}`)}
                             >
-                              📖
+                              Learn
                             </button>
                             <button
                               className={styles.testBtn}
-                              onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}?quizMode=test&subtopic=${encodeURIComponent(st.subtopic)}`)}
+                              onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/test?subtopic=${encodeURIComponent(st.subtopic)}`)}
                             >
-                              📝
+                              Test
                             </button>
                           </div>
                         </div>

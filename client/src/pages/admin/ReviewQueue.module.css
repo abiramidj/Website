@@ -540,3 +540,50 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+/* Quiz Mode badges */
+.modeBadge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--r-full);
+  text-transform: capitalize;
+  letter-spacing: 0.03em;
+}
+
+.mode_both {
+  background: var(--gray-100);
+  color: var(--gray-600);
+  border: 1px solid var(--gray-200);
+}
+
+.mode_learn {
+  background: #f0fdfc;
+  color: #0d9488;
+  border: 1px solid #99f6e4;
+}
+
+.mode_test {
+  background: #f5f6ff;
+  color: #6366f1;
+  border: 1px solid #c7d2fe;
+}
+
+/* Quiz mode select in edit modal */
+.modeSelect {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-800);
+  background: #fff;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--r);
+  padding: 0.5rem 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  width: 100%;
+}
+
+.modeSelect:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+}

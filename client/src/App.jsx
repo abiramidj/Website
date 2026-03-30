@@ -7,6 +7,8 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Quiz from './pages/Quiz.jsx';
+import QuizLearn from './pages/QuizLearn.jsx';
+import QuizTest from './pages/QuizTest.jsx';
 import Results from './pages/Results.jsx';
 import Subscribe from './pages/Subscribe.jsx';
 import SubscribeSuccess from './pages/SubscribeSuccess.jsx';
@@ -55,6 +57,12 @@ export default function App() {
           } />
           <Route path="/history" element={
             <SubscribedRoute><History /></SubscribedRoute>
+          } />
+          <Route path="/quiz/:topic/learn" element={
+            <SubscribedRoute><QuizLearn /></SubscribedRoute>
+          } />
+          <Route path="/quiz/:topic/test" element={
+            <SubscribedRoute><QuizTest /></SubscribedRoute>
           } />
           <Route path="/quiz/:topic" element={
             <SubscribedRoute><Quiz /></SubscribedRoute>

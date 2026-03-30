@@ -5,6 +5,7 @@ const router = Router();
 
 const VALID_DIFF      = ['easy', 'medium', 'hard'];
 const VALID_LEVELS    = ['medical_student', 'resident', 'fellow', 'attending'];
+const VALID_MODES     = ['learn', 'test', 'both'];
 
 function domainPrefix(domain) {
   const words = domain.trim().split(/\s+/);
@@ -48,6 +49,8 @@ function validateRow(row, index) {
     errors.push(`row ${index + 1}: difficulty must be easy/medium/hard`);
   if (row.level && !VALID_LEVELS.includes(row.level))
     errors.push(`row ${index + 1}: level must be medical_student/resident/fellow/attending`);
+  if (row.quiz_mode && !VALID_MODES.includes(row.quiz_mode))
+    errors.push(`row ${index + 1}: quiz_mode must be learn/test/both`);
   return errors;
 }
 
@@ -81,6 +84,7 @@ router.post('/', requireAdmin, async (req, res) => {
       options:     q.options.map(o => o.toString().trim()),
       correct:     parseInt(q.correct, 10),
       explanation: (q.explanation || '').trim(),
+      quiz_mode:   VALID_MODES.includes(q.quiz_mode) ? q.quiz_mode : 'both',
       status:      'pending_review',
     })));
 

@@ -150,6 +150,7 @@ export default function ReviewQueue() {
       options: [...q.options],
       correct: q.correct,
       explanation: q.explanation,
+      quiz_mode: q.quiz_mode || 'both',
     });
   }
 
@@ -257,6 +258,7 @@ export default function ReviewQueue() {
                   <th>ID</th>
                   <th>Domain / Subtopic</th>
                   <th>Difficulty</th>
+                  <th>Mode</th>
                   <th>Status</th>
                   <th className={styles.questionCol}>Question</th>
                   <th>Actions</th>
@@ -265,7 +267,7 @@ export default function ReviewQueue() {
               <tbody>
                 {questions.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className={styles.emptyCell}>
+                    <td colSpan={8} className={styles.emptyCell}>
                       No questions found for these filters.
                     </td>
                   </tr>
@@ -289,6 +291,11 @@ export default function ReviewQueue() {
                         </div>
                       </td>
                       <td><DifficultyBadge difficulty={q.difficulty} /></td>
+                      <td>
+                        <span className={`${styles.modeBadge} ${styles[`mode_${q.quiz_mode || 'both'}`]}`}>
+                          {q.quiz_mode || 'both'}
+                        </span>
+                      </td>
                       <td><StatusBadge status={q.status} /></td>
                       <td className={styles.questionCol}>
                         <span className={styles.questionTrunc}>
@@ -421,6 +428,19 @@ export default function ReviewQueue() {
                   value={editData.explanation}
                   onChange={e => setEditData(d => ({ ...d, explanation: e.target.value }))}
                 />
+              </div>
+
+              <div className={styles.field}>
+                <label className={styles.fieldLabel}>Quiz Mode</label>
+                <select
+                  className={styles.modeSelect}
+                  value={editData.quiz_mode}
+                  onChange={e => setEditData(d => ({ ...d, quiz_mode: e.target.value }))}
+                >
+                  <option value="both">Both (Learn &amp; Test)</option>
+                  <option value="learn">Learn only</option>
+                  <option value="test">Test only</option>
+                </select>
               </div>
             </div>
 
