@@ -24,10 +24,10 @@ export function getTopics(getToken) {
   return authFetch('/quiz/topics', {}, getToken);
 }
 
-export function startQuiz(topic, getToken, subtopic = null) {
+export function startQuiz(topic, getToken, subtopic = null, mode = null) {
   return authFetch('/quiz/start', {
     method: 'POST',
-    body: JSON.stringify({ topic, ...(subtopic ? { subtopic } : {}) }),
+    body: JSON.stringify({ topic, ...(subtopic ? { subtopic } : {}), ...(mode ? { mode } : {}) }),
   }, getToken);
 }
 

@@ -72,7 +72,7 @@ router.get('/topics', requireAuth, async (req, res) => {
 // POST /start — start a quiz session
 router.post('/start', requireAuth, async (req, res) => {
   try {
-    const { topic, subtopic } = req.body;
+    const { topic, subtopic, mode } = req.body;
     const userId = req.user.id;
 
     if (!topic?.trim()) {
@@ -80,9 +80,13 @@ router.post('/start', requireAuth, async (req, res) => {
     }
 
     // Get all approved questions for this topic (optionally filtered by subtopic)
+    const selectFields = mode === 'learn'
+      ? 'id, question, options, correct, explanation, domain, subtopic, difficulty'
+      : 'id, question, options, domain, subtopic, difficulty';
+
     let query = supabaseAdmin
       .from('questions')
-      .select('id, question, options, domain, subtopic, difficulty')
+      .select(selectFields)
       .eq('domain', topic)
       .eq('status', 'approved');
     if (subtopic) query = query.eq('subtopic', subtopic);
@@ -132,7 +136,6 @@ router.post('/start', requireAuth, async (req, res) => {
       selected = [...shuffledUnseen, ...shuffledSeen].slice(0, QUIZ_SIZE);
     }
 
-    // Return questions WITHOUT correct answer or explanation
     const questions = selected.map(q => ({
       id: q.id,
       question: q.question,
@@ -140,6 +143,7 @@ router.post('/start', requireAuth, async (req, res) => {
       domain: q.domain,
       subtopic: q.subtopic,
       difficulty: q.difficulty,
+      ...(mode === 'learn' ? { correct: q.correct, explanation: q.explanation } : {}),
     }));
 
     res.json({ questions, topic, total: questions.length });

@@ -95,7 +95,7 @@ export default function Quiz() {
     setLoading(true);
     setError('');
     try {
-      const data = await startQuiz(decodedTopic, getToken, subtopicParam);
+      const data = await startQuiz(decodedTopic, getToken, subtopicParam, resolvedMode);
       setQuestions(data.questions);
       setAnswers({});
       setCurrentIdx(0);
@@ -206,7 +206,7 @@ export default function Quiz() {
     if (!isCurrentRevealed) {
       return `${styles.optionBtn} ${answers[currentIdx] === i ? styles.optionSelected : ''}`;
     }
-    if (i === currentQ.correct_index) return styles.optLearnCorrect;
+    if (i === currentQ.correct) return styles.optLearnCorrect;
     if (i === answers[currentIdx]) return styles.optLearnWrong;
     return styles.optLearnDimmed;
   }
@@ -214,7 +214,7 @@ export default function Quiz() {
   function getSidebarBtnClass(i) {
     if (i === currentIdx) return `${styles.navBtn} ${styles.navCurrent}`;
     if (isLearnMode && revealed[i]) {
-      return answers[i] === questions[i]?.correct_index
+      return answers[i] === questions[i]?.correct
         ? `${styles.navBtn} ${styles.navAnswered}`
         : `${styles.navBtn} ${styles.navWrong}`;
     }
@@ -303,10 +303,10 @@ export default function Quiz() {
                   >
                     <span className={styles.optionLabel}>{OPTION_LABELS[i]}</span>
                     <span className={styles.optionText}>{opt}</span>
-                    {isCurrentRevealed && i === currentQ.correct_index && (
+                    {isCurrentRevealed && i === currentQ.correct && (
                       <span className={styles.optMark}>✓</span>
                     )}
-                    {isCurrentRevealed && i === answers[currentIdx] && i !== currentQ.correct_index && (
+                    {isCurrentRevealed && i === answers[currentIdx] && i !== currentQ.correct && (
                       <span className={styles.optMark}>✗</span>
                     )}
                   </button>
