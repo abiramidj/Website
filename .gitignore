@@ -5,11 +5,11 @@ server/node_modules/
 
 # Environment variables (never commit these)
 #.env
-.env.local
-.env.development
-.env.production
-client/.env
-server/.env
+#.env.local
+#.env.development
+#.env.production
+#client/.env
+#server/.env
 
 # Build output
 dist/
