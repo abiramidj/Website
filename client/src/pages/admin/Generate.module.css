@@ -272,3 +272,18 @@
   color: #93c5fd;
   text-decoration: underline;
 }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page { padding: 1.25rem 0 2rem; }
+  .container { padding: 0 1rem; }
+  .title { font-size: 1.3rem; }
+
+  .formPanel { padding: 1.25rem 1rem; }
+
+  .logPanel { min-height: 280px; }
+  .logScroll { max-height: 260px; font-size: 0.75rem; }
+  .logPrefix { min-width: 60px; font-size: 0.7rem; }
+
+  .completeSummary { padding: 1rem; }
+}

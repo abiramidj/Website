@@ -295,3 +295,15 @@
 }
 .deleteBtn:hover:not(:disabled) { background: #fee2e2; }
 .deleteBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page { padding: 1.25rem 1rem 2.5rem; }
+
+  .header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .title { font-size: 1.3rem; }
+  .newBtn { align-self: flex-start; }
+
+  .formCard { padding: 1.1rem 1rem; }
+  .formRow { gap: 0.5rem; }
+}

@@ -587,3 +587,32 @@
   outline: none;
   border-color: var(--brand-blue);
 }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page { padding: 1.25rem 0 2rem; }
+  .container { padding: 0 1rem; }
+  .title { font-size: 1.3rem; }
+
+  .filtersRow { gap: 0.5rem; }
+  .filterSelect { flex: 1; min-width: 0; font-size: 0.82rem; }
+  .totalLabel { margin-left: 0; width: 100%; }
+
+  .bulkBar { gap: 0.5rem; padding: 0.5rem 0.75rem; }
+  .bulkBtn { padding: 0.45rem 0.65rem; font-size: 0.78rem; }
+  .bulkClear { margin-left: 0; }
+
+  /* Table scrolls horizontally — already set, just ensure touch */
+  .tableWrap { -webkit-overflow-scrolling: touch; }
+
+  /* Modal takes full screen on mobile */
+  .modalOverlay { padding: 0; align-items: flex-end; }
+  .modal {
+    max-width: 100%;
+    border-radius: var(--r-xl) var(--r-xl) 0 0;
+    max-height: 92vh;
+  }
+  .modalBody { padding: 1rem; }
+  .modalHeader { padding: 1rem; }
+  .modalFooter { padding: 0.85rem 1rem; }
+}

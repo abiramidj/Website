@@ -417,3 +417,27 @@
 .mode_both  { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
 .mode_learn { background: #f0fdfc; color: #0d9488; border: 1px solid #99f6e4; }
 .mode_test  { background: #f5f6ff; color: #6366f1; border: 1px solid #c7d2fe; }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page { padding: 1.25rem 1rem 2.5rem; }
+
+  .header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .title { font-size: 1.3rem; }
+  .templateBtn { align-self: flex-start; }
+
+  .guideCol { padding: 0.85rem 1rem; }
+  .guidePre { font-size: 0.68rem; }
+
+  /* Preview table: horizontal scroll */
+  .tableWrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table { min-width: 600px; }
+
+  .previewHeader { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .previewActions { width: 100%; display: flex; gap: 0.5rem; }
+  .importBtn, .cancelBtn { flex: 1; text-align: center; }
+
+  .domainOverrideRow { flex-wrap: wrap; gap: 0.5rem; }
+  .domainOverrideSelect { width: 100%; }
+  .domainCustomInput { width: 100%; }
+}
