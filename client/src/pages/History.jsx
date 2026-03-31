@@ -100,7 +100,6 @@ export default function History() {
                     <tr key={a.id}>
                       <td>
                         <div className={styles.topicCell}>
-                          <span className={styles.topicAccent} style={{ background: meta.accent }} />
                           <span className={styles.topicIcon}>{meta.icon}</span>
                           <span className={styles.topicName}>{a.topic}</span>
                         </div>

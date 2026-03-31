@@ -222,15 +222,15 @@
 
 .pdfLink {
   display: inline-block;
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #1d4ed8;
   text-decoration: none;
-  padding: 0.2rem 0.6rem;
+  padding: 0.15rem 0.45rem;
   border: 1px solid #bfdbfe;
   border-radius: 4px;
   background: #eff6ff;
+  white-space: nowrap;
 }
 .pdfLink:hover { background: #dbeafe; }
 
@@ -252,13 +252,20 @@
 }
 .card:hover .cardArrow { opacity: 1; transform: translateX(3px); }
 
+.cardActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
 .bookmarkBtn {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 1.1rem;
   padding: 0.25rem;
-  flex-shrink: 0;
   opacity: 0.35;
   transition: opacity 0.15s, transform 0.15s;
   line-height: 1;

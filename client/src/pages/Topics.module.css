@@ -45,6 +45,50 @@
   border-color: var(--brand-blue);
 }
 
+/* ── Mode tab bar ────────────────────────────────────────────────── */
+.modeTabBar {
+  max-width: 1100px;
+  margin: 0 auto 1.25rem;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 0;
+  background: #fff;
+  border-radius: var(--r-xl);
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
+  overflow: hidden;
+}
+
+.modeTabBtn {
+  flex: 1;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  background: transparent;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border-bottom: 3px solid transparent;
+}
+
+.modeTabBtn:hover:not(.modeTabLearnActive):not(.modeTabTestActive) {
+  background: var(--gray-50);
+  color: var(--gray-700);
+}
+
+.modeTabLearnActive {
+  color: #0d9488;
+  border-bottom-color: #0d9488;
+  background: #f0fdfc;
+}
+
+.modeTabTestActive {
+  color: #6366f1;
+  border-bottom-color: #6366f1;
+  background: #f5f6ff;
+}
+
 .statsRow {
   max-width: 1100px;
   margin: 0 auto 1.25rem;
@@ -388,6 +432,15 @@
   .domainFilter {
     width: 100%;
     min-width: unset;
+  }
+
+  .modeTabBar {
+    padding: 0 1rem;
+  }
+
+  .modeTabBtn {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
   }
 
   .statsRow {

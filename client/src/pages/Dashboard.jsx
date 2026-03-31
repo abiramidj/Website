@@ -136,8 +136,16 @@ export default function Dashboard() {
           <div className={styles.aboutSection}>
             <h3 className={styles.aboutSectionTitle}>About the Platform</h3>
             <p className={styles.aboutText}>
-              OncoCliniq is an interactive learning platform designed for surgical oncology trainees and practitioners.
-              [Platform description placeholder — replace with your content.]
+              A comprehensive, multi-level medical education platform purpose-built for surgical oncology. Designed for students, residents, fellows, and practicing surgeons alike, the platform meets learners wherever they are in their journey — from foundational concepts to advanced clinical decision-making.
+            </p>
+            <p className={styles.aboutText}>
+              At its core, the platform offers structured, chapter-based reading drawn from authoritative surgical oncology content, giving learners a solid theoretical grounding in oncologic principles, surgical anatomy, disease staging, and procedural techniques.
+            </p>
+            <p className={styles.aboutText}>
+              To reinforce understanding, two distinct learning modes are available. Learn Mode guides users through quiz questions with immediate feedback, explanations, and references — ideal for building knowledge progressively without the pressure of performance. Test Mode simulates real exam conditions with timed assessments and scored results, helping learners benchmark their readiness for board exams, clinical rotations, or credentialing milestones.
+            </p>
+            <p className={styles.aboutText}>
+              Whether you're a medical student encountering surgical oncology for the first time, a resident preparing for boards, or a fellow refining subspecialty expertise, the platform adapts to your level and keeps your progress front and center.
             </p>
           </div>
           <div className={styles.aboutDivider} />

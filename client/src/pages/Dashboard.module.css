@@ -1080,6 +1080,7 @@
 
   /* Locked overlay */
   .lockedBox { padding: 1.5rem 1.25rem; }
+
 }
 
 @media (max-width: 480px) {

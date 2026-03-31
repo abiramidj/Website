@@ -15,6 +15,7 @@ export default function Topics() {
   const [savedProgress, setSavedProgress] = useState({});
   const [subtopicsOpen, setSubtopicsOpen] = useState({});
   const [domainFilter, setDomainFilter] = useState('');
+  const [activeMode, setActiveMode] = useState('learn');
 
   const totalAttempts = attempts.length;
   const bestScore = attempts.length ? Math.max(...attempts.map(a => a.score ?? 0)) : null;
@@ -68,6 +69,21 @@ export default function Topics() {
         </select>
       </div>
 
+      <div className={styles.modeTabBar}>
+        <button
+          className={`${styles.modeTabBtn} ${activeMode === 'learn' ? styles.modeTabLearnActive : ''}`}
+          onClick={() => setActiveMode('learn')}
+        >
+          Learn Mode
+        </button>
+        <button
+          className={`${styles.modeTabBtn} ${activeMode === 'test' ? styles.modeTabTestActive : ''}`}
+          onClick={() => setActiveMode('test')}
+        >
+          Test Mode
+        </button>
+      </div>
+
       <div className={styles.statsRow}>
         <div className={styles.statTile}>
           <span className={styles.statNum}>{totalAttempts}</span>
@@ -113,43 +129,34 @@ export default function Topics() {
                     </div>
                   </div>
 
-                  {savedProgress[t.topic] ? (
+                  {savedProgress[t.topic]?.mode === activeMode ? (
                     <div className={styles.topicActions}>
                       <p className={styles.progressHint}>
-                        {savedProgress[t.topic].answered}/{savedProgress[t.topic].total} answered — {savedProgress[t.topic].mode === 'learn' ? '📖 Learn' : '📝 Test'} in progress
+                        {savedProgress[t.topic].answered}/{savedProgress[t.topic].total} answered — in progress
                       </p>
                       <div className={styles.modeRow}>
                         <button
                           className={styles.startBtn}
-                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${savedProgress[t.topic].mode}`)}
+                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${activeMode}`)}
                         >
                           Resume →
                         </button>
                         <button
                           className={styles.restartBtn}
-                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${savedProgress[t.topic].mode}?restart=1`)}
+                          onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${activeMode}?restart=1`)}
                         >
                           Restart
                         </button>
                       </div>
                     </div>
                   ) : (
-                    <div className={styles.modeRow}>
-                      <button
-                        className={styles.learnBtn}
-                        onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/learn`)}
-                        disabled={t.questionCount === 0}
-                      >
-                        📖 Learn
-                      </button>
-                      <button
-                        className={styles.testBtn}
-                        onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/test`)}
-                        disabled={t.questionCount === 0}
-                      >
-                        📝 Test
-                      </button>
-                    </div>
+                    <button
+                      className={activeMode === 'learn' ? styles.learnBtn : styles.testBtn}
+                      onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${activeMode}`)}
+                      disabled={t.questionCount === 0}
+                    >
+                      {activeMode === 'learn' ? '📖 Start Learning →' : '📝 Start Test →'}
+                    </button>
                   )}
                 </div>
               </div>
@@ -173,16 +180,10 @@ export default function Topics() {
                           </div>
                           <div className={styles.subtopicActions}>
                             <button
-                              className={styles.learnBtn}
-                              onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/learn?subtopic=${encodeURIComponent(st.subtopic)}`)}
+                              className={activeMode === 'learn' ? styles.learnBtn : styles.testBtn}
+                              onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/${activeMode}?subtopic=${encodeURIComponent(st.subtopic)}`)}
                             >
-                              Learn
-                            </button>
-                            <button
-                              className={styles.testBtn}
-                              onClick={() => navigate(`/quiz/${encodeURIComponent(t.topic)}/test?subtopic=${encodeURIComponent(st.subtopic)}`)}
-                            >
-                              Test
+                              {activeMode === 'learn' ? 'Learn' : 'Test'}
                             </button>
                           </div>
                         </div>

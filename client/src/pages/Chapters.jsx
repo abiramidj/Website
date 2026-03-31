@@ -145,6 +145,15 @@ export default function Chapters() {
                         </span>
                       )}
                       {ch.excerpt && <p className={styles.cardExcerpt}>{ch.excerpt}</p>}
+                    </div>
+                    <div className={styles.cardActions}>
+                      <button
+                        className={`${styles.bookmarkBtn} ${bookmarks.has(ch.id) ? styles.bookmarkActive : ''}`}
+                        onClick={e => toggleBookmark(e, ch.id)}
+                        title={bookmarks.has(ch.id) ? 'Remove bookmark' : 'Bookmark this chapter'}
+                      >
+                        {bookmarks.has(ch.id) ? '🔖' : '🏷️'}
+                      </button>
                       {ch.pdf_url && (
                         <a
                           href={ch.pdf_url}
@@ -153,17 +162,10 @@ export default function Chapters() {
                           className={styles.pdfLink}
                           onClick={e => e.stopPropagation()}
                         >
-                          Download PDF
+                          PDF
                         </a>
                       )}
                     </div>
-                    <button
-                      className={`${styles.bookmarkBtn} ${bookmarks.has(ch.id) ? styles.bookmarkActive : ''}`}
-                      onClick={e => toggleBookmark(e, ch.id)}
-                      title={bookmarks.has(ch.id) ? 'Remove bookmark' : 'Bookmark this chapter'}
-                    >
-                      {bookmarks.has(ch.id) ? '🔖' : '🏷️'}
-                    </button>
                     <div className={styles.cardArrow} style={{ color: meta.color }}>→</div>
                   </Link>
                 ))}
