@@ -394,8 +394,65 @@
 }
 .subscribeBtn:hover { opacity: 0.9; transform: translateY(-1px); text-decoration: none; color: #fff; }
 
+/* ── Hamburger button (mobile only) ─────────────────────────────── */
+.hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r);
+  width: 38px;
+  height: 38px;
+  font-size: 1.15rem;
+  color: var(--gray-700);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.hamburger:hover { background: var(--gray-100); }
+
+/* ── Mobile menu panel ───────────────────────────────────────────── */
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.75rem 1rem 1rem;
+  gap: 0.25rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.mobileLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: var(--r);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.mobileLink:hover { background: var(--gray-100); color: var(--gray-900); text-decoration: none; }
+.mobileLink.active { background: var(--blue-50); color: var(--brand-blue); font-weight: 600; }
+
 @media (max-width: 768px) {
   .links { display: none; }
   .userInfo { display: none; }
   .brandSub { display: none; }
+  .hamburger { display: flex; }
+  .mobileMenu { display: flex; }
+
+  .inner { padding: 0 1rem; gap: 0.35rem; }
+
+  /* Prevent profile dropdown from going off-screen */
+  .dropdown {
+    right: -0.5rem;
+    min-width: 220px;
+    max-width: calc(100vw - 1rem);
+  }
+
+  .subscribeBtn { display: none; }
 }

@@ -704,3 +704,114 @@
 .dotWrong {
   background: #fc8181;
 }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
+  }
+
+  .sidebarTitle { display: none; }
+
+  .navGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.35rem;
+    margin-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex: 1;
+  }
+  .navGrid::-webkit-scrollbar { display: none; }
+
+  .navBtn {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    aspect-ratio: 1;
+  }
+
+  .sidebarLegend {
+    flex-direction: row;
+    gap: 0.6rem;
+    flex-shrink: 0;
+    font-size: 0.65rem;
+  }
+
+  .questionCard {
+    padding: 1.25rem 1rem;
+  }
+
+  .questionStem {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .optionsList {
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .optionBtn,
+  .optLearnCorrect,
+  .optLearnWrong,
+  .optLearnDimmed {
+    padding: 0.85rem 0.9rem;
+    font-size: 0.875rem;
+  }
+
+  .topBarInner {
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .topTopic {
+    font-size: 0.82rem;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .topProgress { font-size: 0.75rem; }
+
+  .topTimer {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .navigation {
+    gap: 0.5rem;
+  }
+
+  .navPrev, .navNext, .submitBtn {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.85rem;
+  }
+
+  .modeSelectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .instructionsCard {
+    margin: 1rem;
+    padding: 1.5rem 1.25rem;
+  }
+}

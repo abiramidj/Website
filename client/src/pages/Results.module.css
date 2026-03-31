@@ -377,3 +377,65 @@
 .bottomNav {
   margin-top: 1.5rem;
 }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page { padding: 1rem 0 2rem; }
+
+  .container { padding: 0 1rem; }
+
+  .summaryTop {
+    padding: 1.75rem 1.25rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .scoreCircle {
+    width: 110px;
+    height: 110px;
+  }
+
+  .scoreNum { font-size: 1.75rem; }
+
+  .summaryRight {
+    align-items: center;
+    width: 100%;
+  }
+
+  .gradeLabel { font-size: 1.4rem; }
+
+  .metaStats {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .metaDivider { display: none; }
+
+  .breakdownRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .breakdownLabel {
+    width: auto;
+    font-size: 0.82rem;
+  }
+
+  .reviewCard {
+    padding: 1.25rem 1rem;
+  }
+
+  .reviewOptions { gap: 0.4rem; }
+
+  .reviewOpt {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.82rem;
+  }
+
+  .reviewStem { font-size: 0.875rem; }
+
+  .sectionTitle { font-size: 0.95rem; }
+}

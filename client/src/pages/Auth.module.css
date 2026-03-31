@@ -450,3 +450,18 @@
   color: var(--gray-400);
   margin-top: 0.2rem;
 }
+
+/* ── Additional mobile fixes ─────────────────────────────────────── */
+@media (max-width: 480px) {
+  .card, .cardWide {
+    padding: 1.35rem 1.1rem;
+    max-width: 100%;
+    border-radius: var(--r-xl);
+  }
+
+  .formSide {
+    padding: 1.5rem 1rem;
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
+}

@@ -11,6 +11,7 @@ export default function Navbar() {
   const { user, profile, isAdmin, isSubscribed, signOut, refreshProfile } = useAuth();
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   async function handleSignOut() {
@@ -36,11 +37,13 @@ export default function Navbar() {
   const displayName = profile?.full_name || user?.email?.split('@')[0] || 'User';
   const initials = displayName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
 
+  function closeMenu() { setMenuOpen(false); }
+
   return (
     <nav className={styles.nav}>
       <div className={styles.inner}>
         {/* Brand */}
-        <Link to="/" className={styles.brand}>
+        <Link to="/" className={styles.brand} onClick={closeMenu}>
           <img src="/logo1.jpg" alt="OncoCliniq" className={styles.brandMark} />
           <span className={styles.brandName}>
             OncoCliniq
@@ -48,41 +51,25 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Nav links */}
+        {/* Nav links (desktop) */}
         <div className={styles.links}>
           {user ? (
             <>
               {isSubscribed && !isAdmin && (
                 <>
-                  <NavLink to="/topics" className={({ isActive }) => navClass(isActive)}>
-                    Quiz
-                  </NavLink>
-                  <NavLink to="/library" className={({ isActive }) => navClass(isActive)}>
-                    Library
-                  </NavLink>
-                  <NavLink to="/history" className={({ isActive }) => navClass(isActive)}>
-                    History
-                  </NavLink>
+                  <NavLink to="/topics" className={({ isActive }) => navClass(isActive)}>Quiz</NavLink>
+                  <NavLink to="/library" className={({ isActive }) => navClass(isActive)}>Library</NavLink>
+                  <NavLink to="/history" className={({ isActive }) => navClass(isActive)}>History</NavLink>
                 </>
               )}
               {isAdmin && (
                 <>
                   <span className={styles.divider} />
-                  <NavLink to="/admin" end className={({ isActive }) => navClass(isActive, styles.adminLink)}>
-                    Analytics
-                  </NavLink>
-                  <NavLink to="/admin/generate" className={({ isActive }) => navClass(isActive, styles.adminLink)}>
-                    Generate
-                  </NavLink>
-                  <NavLink to="/admin/review" className={({ isActive }) => navClass(isActive, styles.adminLink)}>
-                    Review
-                  </NavLink>
-                  <NavLink to="/admin/import" className={({ isActive }) => navClass(isActive, styles.adminLink)}>
-                    Import
-                  </NavLink>
-                  <NavLink to="/admin/chapters" className={({ isActive }) => navClass(isActive, styles.adminLink)}>
-                    Chapters
-                  </NavLink>
+                  <NavLink to="/admin" end className={({ isActive }) => navClass(isActive, styles.adminLink)}>Analytics</NavLink>
+                  <NavLink to="/admin/generate" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Generate</NavLink>
+                  <NavLink to="/admin/review" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Review</NavLink>
+                  <NavLink to="/admin/import" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Import</NavLink>
+                  <NavLink to="/admin/chapters" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Chapters</NavLink>
                 </>
               )}
             </>
@@ -93,11 +80,8 @@ export default function Navbar() {
         <div className={styles.userArea}>
           {user ? (
             <>
-              {/* Subscribe CTA for free users */}
               {!isAdmin && !isSubscribed && (
-                <Link to="/subscribe" className={styles.subscribeBtn}>
-                  Get Pro
-                </Link>
+                <Link to="/subscribe" className={styles.subscribeBtn}>Get Pro</Link>
               )}
 
               <div className={styles.profileWrapper} ref={dropdownRef}>
@@ -140,25 +124,28 @@ export default function Navbar() {
                     </div>
                     {!isAdmin && isSubscribed && (
                       <div className={styles.dropdownRow}>
-                        <Link to="/subscribe" className={styles.billingLink} onClick={() => setDropdownOpen(false)}>
-                          Manage billing →
-                        </Link>
+                        <Link to="/subscribe" className={styles.billingLink} onClick={() => setDropdownOpen(false)}>Manage billing →</Link>
                       </div>
                     )}
                     {!isAdmin && !isSubscribed && (
                       <div className={styles.dropdownRow}>
-                        <Link to="/subscribe" className={styles.upgradeLink} onClick={() => setDropdownOpen(false)}>
-                          Upgrade to Pro →
-                        </Link>
+                        <Link to="/subscribe" className={styles.upgradeLink} onClick={() => setDropdownOpen(false)}>Upgrade to Pro →</Link>
                       </div>
                     )}
                     <div className={styles.dropdownDivider} />
-                    <button className={styles.signOutBtn} onClick={handleSignOut}>
-                      Sign out
-                    </button>
+                    <button className={styles.signOutBtn} onClick={handleSignOut}>Sign out</button>
                   </div>
                 )}
               </div>
+
+              {/* Hamburger (mobile only) */}
+              <button
+                className={styles.hamburger}
+                onClick={() => setMenuOpen(o => !o)}
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              >
+                {menuOpen ? '✕' : '☰'}
+              </button>
             </>
           ) : (
             <>
@@ -168,6 +155,31 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {menuOpen && user && (
+        <div className={styles.mobileMenu}>
+          {isSubscribed && !isAdmin && (
+            <>
+              <NavLink to="/topics" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Quiz</NavLink>
+              <NavLink to="/library" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Library</NavLink>
+              <NavLink to="/history" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>History</NavLink>
+            </>
+          )}
+          {isAdmin && (
+            <>
+              <NavLink to="/admin" end className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Analytics</NavLink>
+              <NavLink to="/admin/generate" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Generate</NavLink>
+              <NavLink to="/admin/review" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Review</NavLink>
+              <NavLink to="/admin/import" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Import</NavLink>
+              <NavLink to="/admin/chapters" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Chapters</NavLink>
+            </>
+          )}
+          {!isAdmin && !isSubscribed && (
+            <Link to="/subscribe" className={styles.mobileLink} onClick={closeMenu}>⭐ Get Pro</Link>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

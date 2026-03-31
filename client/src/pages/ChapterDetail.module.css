@@ -224,3 +224,25 @@
   color: #b91c1c;
   margin-bottom: 1.25rem;
 }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header { padding: 1.25rem 1rem 1.5rem; }
+
+  .article {
+    padding: 1.25rem 1rem 2rem;
+    font-size: 0.82rem;
+  }
+
+  .article h1 { font-size: 1.15rem; }
+  .article h2 { font-size: 1rem; }
+  .article h3 { font-size: 0.9rem; }
+  .article h4 { font-size: 0.8rem; }
+
+  .article table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.78rem;
+  }
+}

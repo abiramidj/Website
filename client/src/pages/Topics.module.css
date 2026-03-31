@@ -373,3 +373,87 @@
   border-color: var(--gray-200) !important;
   cursor: not-allowed;
 }
+
+/* ── Mobile responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header {
+    padding: 1.25rem 1rem 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .title { font-size: 1.3rem; }
+
+  .domainFilter {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .statsRow {
+    padding: 0 1rem;
+    gap: 0.6rem;
+  }
+
+  .statTile {
+    padding: 0.75rem 1.1rem;
+    min-width: 90px;
+  }
+
+  .statNum { font-size: 1.4rem; }
+
+  .topicsGrid {
+    padding: 0 1rem 1.5rem;
+    gap: 0.6rem;
+  }
+
+  .topicContent {
+    padding: 0.85rem 1rem;
+    gap: 0.85rem;
+  }
+
+  .topicIconWrap {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .topicName { font-size: 0.9rem; }
+
+  .topicMeta { gap: 1rem; }
+
+  .modeRow {
+    gap: 0.4rem;
+  }
+
+  .learnBtn,
+  .testBtn,
+  .startBtn {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.78rem;
+  }
+
+  .restartBtn {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.78rem;
+  }
+
+  .subtopicsSection {
+    padding: 0.5rem 1rem 0.85rem;
+  }
+
+  .subtopicRow {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topicRow { min-height: unset; }
+
+  .topicMeta { gap: 0.75rem; }
+
+  .progressHint { font-size: 0.7rem; }
+
+  .statTile { min-width: 80px; }
+}
