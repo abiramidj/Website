@@ -107,6 +107,19 @@ export function AuthProvider({ children }) {
     return { ...data, profile: profileData };
   }
 
+  // ── Forgot / reset password ────────────────────────────────────────
+  async function resetPassword(email) {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/reset-password',
+    });
+    if (error) throw error;
+  }
+
+  async function updatePassword(newPassword) {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) throw error;
+  }
+
   // ── Sign out ───────────────────────────────────────────────────────
   // scope:'local' = clears localStorage only, no network round-trip.
   // State is cleared immediately; onAuthStateChange(SIGNED_OUT) fires
@@ -135,7 +148,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={{
       user, profile, loading, isAdmin, isSubscribed,
-      signUp, signIn, signOut, getToken, refreshProfile,
+      signUp, signIn, signOut, getToken, refreshProfile, resetPassword, updatePassword,
     }}>
       {children}
     </AuthContext.Provider>

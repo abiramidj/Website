@@ -146,6 +146,10 @@ export default function Login() {
               </div>
             </div>
 
+            <div className={styles.forgotWrap}>
+              <Link to="/forgot-password" className={styles.forgotLink}>Forgot password?</Link>
+            </div>
+
             <button type="submit" className={styles.submitBtn} disabled={loading}>
               {loading ? <span className={styles.spinner} /> : 'Sign in →'}
             </button>

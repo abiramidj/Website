@@ -5,6 +5,8 @@ import ProtectedRoute, { AdminRoute, SubscribedRoute } from './components/Protec
 
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Quiz from './pages/Quiz.jsx';
 import QuizLearn from './pages/QuizLearn.jsx';
@@ -39,6 +41,8 @@ export default function App() {
           <Route path="/" element={<RootRedirect />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Always accessible to logged-in users */}
           <Route path="/dashboard" element={
