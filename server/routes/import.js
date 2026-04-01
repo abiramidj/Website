@@ -37,7 +37,7 @@ async function generateId(domain) {
 function validateRow(row, index) {
   const errors = [];
   if (!row.domain?.trim())
-    errors.push(`row ${index + 1}: domain is required`);
+    errors.push(`row ${index + 1}: topic is required`);
   if (!row.question || typeof row.question !== 'string' || !row.question.trim())
     errors.push(`row ${index + 1}: question is required`);
   if (!Array.isArray(row.options) || row.options.length !== 4 || row.options.some(o => !o?.toString().trim()))
@@ -66,14 +66,20 @@ router.post('/', requireAdmin, async (req, res) => {
       return res.status(400).json({ error: 'Maximum 200 questions per import' });
     }
 
+    // Normalise: accept 'topic' as an alias for 'domain'
+    const normalised = questions.map(q => ({
+      ...q,
+      domain: q.domain || q.topic || '',
+    }));
+
     // Validate all rows first
-    const allErrors = questions.flatMap((q, i) => validateRow(q, i));
+    const allErrors = normalised.flatMap((q, i) => validateRow(q, i));
     if (allErrors.length > 0) {
       return res.status(422).json({ error: 'Validation failed', details: allErrors });
     }
 
     // Build rows with generated IDs
-    const rows = await Promise.all(questions.map(async (q) => ({
+    const rows = await Promise.all(normalised.map(async (q) => ({
       id:          await generateId(q.domain),
       domain:      q.domain,
       subtopic:    (q.subtopic || '').trim(),

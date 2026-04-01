@@ -42,7 +42,7 @@ function parseCsv(text) {
     headers.forEach((h, idx) => { row[h] = (cols[idx] || '').trim(); });
 
     return {
-      domain:      row.domain || '',
+      domain:      row.topic || row.domain || '',
       subtopic:    row.subtopic || '',
       difficulty:  row.difficulty || 'medium',
       level:       row.level || 'resident',
@@ -174,7 +174,7 @@ export default function ImportQuestions() {
           <h3 className={styles.guideTitle}>JSON format</h3>
           <pre className={styles.guidePre}>{`[
   {
-    "domain": "Breast Cancer",       // required
+    "topic": "Breast Cancer",         // required
     "subtopic": "Staging",           // optional
     "difficulty": "easy|medium|hard",
     "level": "medical_student|resident|fellow|attending",
@@ -188,12 +188,12 @@ export default function ImportQuestions() {
         </div>
         <div className={styles.guideCol}>
           <h3 className={styles.guideTitle}>CSV format</h3>
-          <pre className={styles.guidePre}>{`domain,subtopic,difficulty,level,quiz_mode,question,option_a,option_b,option_c,option_d,correct,explanation
+          <pre className={styles.guidePre}>{`topic,subtopic,difficulty,level,quiz_mode,question,option_a,option_b,option_c,option_d,correct,explanation
 Breast Cancer,Staging,medium,resident,both,"Question…",A,B,C,D,1,"Explanation…"`}</pre>
           <p className={styles.guideNote}>
             <strong>correct</strong> = 0-indexed (0=A, 1=B, 2=C, 3=D).<br />
             <strong>quiz_mode</strong> = both / learn / test (default: both).<br />
-            You can override the domain for all questions using the selector below.
+            You can override the topic for all questions using the selector below.
           </p>
         </div>
       </div>
@@ -264,23 +264,23 @@ Breast Cancer,Staging,medium,resident,both,"Question…",A,B,C,D,1,"Explanation�
           {/* Domain override */}
           <div className={styles.domainOverrideRow}>
             <label className={styles.domainOverrideLabel}>
-              Assign all questions to domain:
+              Assign all questions to topic:
             </label>
             <select
               className={styles.domainOverrideSelect}
               value={domainOverride}
               onChange={e => { setDomainOverride(e.target.value); setCustomDomain(''); }}
             >
-              <option value="">— keep domain from file —</option>
+              <option value="">— keep topic from file —</option>
               {domains.map(d => (
                 <option key={d} value={d}>{d}</option>
               ))}
-              <option value="__custom__">+ Enter custom domain…</option>
+              <option value="__custom__">+ Enter custom topic…</option>
             </select>
             {domainOverride === '__custom__' && (
               <input
                 className={styles.domainCustomInput}
-                placeholder="Type domain name…"
+                placeholder="Type topic name…"
                 value={customDomain}
                 onChange={e => setCustomDomain(e.target.value)}
               />
@@ -301,7 +301,7 @@ Breast Cancer,Staging,medium,resident,both,"Question…",A,B,C,D,1,"Explanation�
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Domain</th>
+                  <th>Topic</th>
                   <th>Subtopic</th>
                   <th>Difficulty</th>
                   <th>Level</th>

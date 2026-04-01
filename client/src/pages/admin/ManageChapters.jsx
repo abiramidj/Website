@@ -23,7 +23,7 @@ function ChapterForm({ initial, onSave, onCancel, saving }) {
             onChange={e => set('title', e.target.value)} placeholder="Chapter title" />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>Domain</label>
+          <label className={styles.label}>Topic</label>
           <input className={styles.input} value={form.domain}
             onChange={e => set('domain', e.target.value)} placeholder="e.g. Breast Cancer" />
         </div>
@@ -204,7 +204,7 @@ export default function ManageChapters() {
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Domain</th>
+                <th>Topic</th>
                 <th>Subtopic</th>
                 <th>Order</th>
                 <th>Status</th>

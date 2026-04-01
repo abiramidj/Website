@@ -196,7 +196,7 @@ export default function ReviewQueue() {
             value={filterDomain}
             onChange={e => setFilterDomain(e.target.value)}
           >
-            <option value="">All Domains</option>
+            <option value="">All Topics</option>
             {DOMAINS.filter(Boolean).map(d => (
               <option key={d} value={d}>{d}</option>
             ))}
@@ -256,7 +256,7 @@ export default function ReviewQueue() {
                     />
                   </th>
                   <th>ID</th>
-                  <th>Domain / Subtopic</th>
+                  <th>Topic / Subtopic</th>
                   <th>Difficulty</th>
                   <th>Mode</th>
                   <th>Status</th>

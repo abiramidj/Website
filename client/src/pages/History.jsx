@@ -4,12 +4,6 @@ import { useAuth } from '../hooks/useAuth.jsx';
 import { getAttempts } from '../lib/api.js';
 import styles from './History.module.css';
 
-const TOPIC_META = {
-  'Breast Cancer':       { icon: '🩺', accent: 'linear-gradient(90deg,#fda4af,#fb7185)' },
-  'GI Tumors':           { icon: '🔬', accent: 'linear-gradient(90deg,#99f6e4,#5eead4)' },
-  'Surgical Techniques': { icon: '🏥', accent: 'linear-gradient(90deg,#c7d2fe,#a5b4fc)' },
-};
-const DEFAULT_META = { icon: '📚', accent: 'linear-gradient(90deg,#bae6fd,#7dd3fc)' };
 
 function ScoreBadge({ score }) {
   let cls = styles.badgeGray;
@@ -95,12 +89,10 @@ export default function History() {
               </thead>
               <tbody>
                 {attempts.map(a => {
-                  const meta = TOPIC_META[a.topic] || DEFAULT_META;
                   return (
                     <tr key={a.id}>
                       <td>
                         <div className={styles.topicCell}>
-                          <span className={styles.topicIcon}>{meta.icon}</span>
                           <span className={styles.topicName}>{a.topic}</span>
                         </div>
                       </td>

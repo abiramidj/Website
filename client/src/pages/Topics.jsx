@@ -62,7 +62,7 @@ export default function Topics() {
           value={domainFilter}
           onChange={e => setDomainFilter(e.target.value)}
         >
-          <option value="">All Domains</option>
+          <option value="">All Topics</option>
           {topics.map(t => (
             <option key={t.topic} value={t.topic}>{t.topic}</option>
           ))}
