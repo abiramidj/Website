@@ -8,7 +8,13 @@ async function authFetch(url, options = {}, getToken) {
   };
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
-  const res = await fetch(`${BASE}${url}`, { ...options, headers });
+  let res;
+  try {
+    res = await fetch(`${BASE}${url}`, { ...options, headers });
+  } catch {
+    window.dispatchEvent(new CustomEvent('server-unavailable'));
+    throw new Error('Server unavailable');
+  }
   const data = await res.json().catch(() => ({ error: 'Invalid JSON response' }));
   if (!res.ok) {
     const msg = data.details?.length

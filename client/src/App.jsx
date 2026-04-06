@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAuth } from './hooks/useAuth.jsx';
 import Navbar from './components/Navbar.jsx';
 import ProtectedRoute, { AdminRoute, SubscribedRoute } from './components/ProtectedRoute.jsx';
@@ -24,6 +25,22 @@ import ManageChapters from './pages/admin/ManageChapters.jsx';
 import Topics from './pages/Topics.jsx';
 import History from './pages/History.jsx';
 
+function ServerDownHandler() {
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
+
+  useEffect(() => {
+    async function handleServerDown() {
+      await signOut();
+      navigate('/login', { replace: true });
+    }
+    window.addEventListener('server-unavailable', handleServerDown);
+    return () => window.removeEventListener('server-unavailable', handleServerDown);
+  }, [navigate, signOut]);
+
+  return null;
+}
+
 function RootRedirect() {
   const { user, isAdmin, loading } = useAuth();
   if (loading) return <div className="page-loading">Loading…</div>;
@@ -35,6 +52,7 @@ function RootRedirect() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ServerDownHandler />
       <Navbar />
       <main>
         <Routes>
