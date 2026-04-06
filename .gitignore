@@ -4,12 +4,13 @@ client/node_modules/
 server/node_modules/
 
 # Environment variables (never commit these)
-#.env
-#.env.local
-#.env.development
-#.env.production
-#client/.env
-#server/.env
+.env
+.env.local
+.env.development
+.env.production
+client/.env
+server/.env
+server/.env.example
 
 # Build output
 dist/
