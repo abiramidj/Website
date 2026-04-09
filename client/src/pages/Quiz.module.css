@@ -1,6 +1,6 @@
 .page {
   min-height: calc(100vh - var(--nav-h));
-  background: #f5f5f7;
+  background: var(--bg-page);
 }
 
 /* Instructions */
@@ -8,7 +8,7 @@
   max-width: 820px;
   margin: 3rem auto;
   padding: 2.5rem 2rem;
-  background: #ffffff;
+  background: var(--bg-surface);
   border: none;
   border-radius: var(--r-xl);
   box-shadow: 0 4px 32px 0 rgb(0 0 0 / 0.09);
@@ -100,7 +100,7 @@
 
 /* Top bar */
 .topBar {
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--topbar-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(229, 231, 235, 0.6);
@@ -176,7 +176,7 @@
 .sidebar {
   width: 210px;
   flex-shrink: 0;
-  background: #ffffff;
+  background: var(--bg-surface);
   border: none;
   border-radius: var(--r-lg);
   padding: 1.25rem 1rem;
@@ -268,7 +268,7 @@
 }
 
 .questionCard {
-  background: #ffffff;
+  background: var(--bg-surface);
   border: none;
   border-radius: var(--r-xl);
   padding: 2.5rem;

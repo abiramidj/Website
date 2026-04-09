@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.jsx';
+import { useTheme } from '../hooks/useTheme.jsx';
 import styles from './Navbar.module.css';
 
 function navClass(isActive, extra = '') {
@@ -9,6 +10,7 @@ function navClass(isActive, extra = '') {
 
 export default function Navbar() {
   const { user, profile, isAdmin, isSubscribed, signOut, refreshProfile } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -153,6 +155,14 @@ export default function Navbar() {
               <Link to="/register" className={styles.registerBtn}>Register free</Link>
             </>
           )}
+          <button
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </div>
       </div>
 

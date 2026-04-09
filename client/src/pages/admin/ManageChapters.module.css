@@ -60,7 +60,7 @@
 }
 
 .formCard {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 1.5rem;
@@ -102,7 +102,7 @@
   box-sizing: border-box;
   transition: border-color 0.15s;
 }
-.input:focus { border-color: #1d4ed8; background: #fff; }
+.input:focus { border-color: #1d4ed8; background: var(--bg-surface); }
 
 /* Editor */
 .editorWrap {
@@ -132,7 +132,7 @@
   font-size: 0.82rem;
   color: #1e293b;
   line-height: 1.7;
-  background: #fff;
+  background: var(--bg-surface);
   border: none;
   padding: 1rem;
   resize: vertical;
@@ -204,7 +204,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   overflow: hidden;

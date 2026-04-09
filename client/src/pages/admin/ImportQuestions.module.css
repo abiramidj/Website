@@ -87,7 +87,7 @@
 
 /* Input card */
 .inputCard {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 1.25rem;
@@ -118,7 +118,7 @@
 }
 .tab:hover { color: #1d4ed8; }
 .tabActive {
-  background: #fff;
+  background: var(--bg-surface);
   color: #1d4ed8;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
@@ -138,7 +138,7 @@
   box-sizing: border-box;
   transition: border-color 0.15s;
 }
-.textarea:focus { border-color: #1d4ed8; background: #fff; }
+.textarea:focus { border-color: #1d4ed8; background: var(--bg-surface); }
 
 .parseBtn {
   margin-top: 0.75rem;
@@ -187,7 +187,7 @@
 
 /* Preview card */
 .previewCard {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   overflow: hidden;
@@ -319,7 +319,7 @@
   font-size: 0.82rem;
   font-weight: 600;
   color: #1e293b;
-  background: #fff;
+  background: var(--bg-surface);
   border: 1.5px solid #7dd3fc;
   border-radius: 7px;
   padding: 0.35rem 0.75rem;
