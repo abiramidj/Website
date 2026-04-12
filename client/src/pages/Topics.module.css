@@ -4,9 +4,9 @@
 }
 
 .header {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 1rem;
+  padding: 2.5rem 2rem 1.25rem;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -47,14 +47,14 @@
 
 /* ── Mode tab bar ────────────────────────────────────────────────── */
 .modeTabBar {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto 1.25rem;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   display: flex;
   gap: 0;
   background: var(--bg-surface);
   border-radius: var(--r-xl);
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
+  border: 1px solid var(--gray-200);
   overflow: hidden;
 }
 
@@ -90,9 +90,9 @@
 }
 
 .statsRow {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto 1.25rem;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -101,7 +101,7 @@
 .statTile {
   background: var(--bg-surface);
   border-radius: var(--r-xl);
-  box-shadow: 0 2px 16px rgb(0 0 0 / 0.06), 0 1px 4px rgb(0 0 0 / 0.03);
+  border: 1px solid var(--gray-200);
   padding: 1rem 1.75rem;
   display: flex;
   flex-direction: column;
@@ -134,9 +134,9 @@
 }
 
 .topicsGrid {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem 2rem;
+  padding: 0 2rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -146,13 +146,13 @@
   background: var(--bg-surface);
   border-radius: var(--r-xl);
   overflow: hidden;
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
-  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid var(--gray-200);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .topicCard:hover {
-  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.1);
-  transform: translateY(-2px);
+  border-color: var(--gray-300);
+  box-shadow: var(--shadow-md);
 }
 
 .topicRow {

@@ -47,7 +47,7 @@
 }
 
 .heroInner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -111,9 +111,9 @@
 
 /* Main content */
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: 2.5rem 2rem 4.5rem;
 }
 
 .error {
@@ -127,7 +127,7 @@
 }
 
 .section {
-  margin-bottom: 2.75rem;
+  margin-bottom: 3.5rem;
 }
 
 .sectionHeader {
@@ -325,13 +325,13 @@
   background: var(--bg-surface);
   border-radius: var(--r-xl);
   overflow: hidden;
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
-  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid var(--gray-200);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .topicCard:hover {
-  box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.1);
-  transform: translateY(-2px);
+  border-color: var(--gray-300);
+  box-shadow: var(--shadow-md);
 }
 
 .topicRow {
@@ -598,10 +598,9 @@
 /* Table */
 .tableWrap {
   background: var(--bg-surface);
-  border: none;
+  border: 1px solid var(--gray-200);
   border-radius: var(--r-xl);
   overflow: hidden;
-  box-shadow: 0 2px 16px 0 rgb(0 0 0 / 0.07);
 }
 
 .table {
@@ -794,17 +793,17 @@
 .overviewCard {
   background: var(--bg-surface);
   border-radius: var(--r-xl);
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
+  border: 1px solid var(--gray-200);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .overviewCard:hover {
-  box-shadow: 0 6px 24px 0 rgb(0 0 0 / 0.1);
-  transform: translateY(-2px);
+  border-color: var(--gray-300);
+  box-shadow: var(--shadow-md);
 }
 
 .cardIconWrap {
@@ -889,7 +888,7 @@
   margin-bottom: 0;
   background: var(--bg-surface);
   border-radius: var(--r-xl);
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 0.06);
+  border: 1px solid var(--gray-200);
   padding: 1.75rem;
 }
 
