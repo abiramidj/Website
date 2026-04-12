@@ -70,18 +70,30 @@ export default function Topics() {
       </div>
 
       <div className={styles.modeTabBar}>
-        <button
-          className={`${styles.modeTabBtn} ${activeMode === 'learn' ? styles.modeTabLearnActive : ''}`}
-          onClick={() => setActiveMode('learn')}
-        >
-          Learn Mode
-        </button>
-        <button
-          className={`${styles.modeTabBtn} ${activeMode === 'test' ? styles.modeTabTestActive : ''}`}
-          onClick={() => setActiveMode('test')}
-        >
-          Test Mode
-        </button>
+        <div className={styles.modeTabWrap}>
+          <button
+            className={`${styles.modeTabBtn} ${activeMode === 'learn' ? styles.modeTabLearnActive : ''}`}
+            onClick={() => setActiveMode('learn')}
+          >
+            Learn Mode
+          </button>
+          <div className={styles.modeTooltip}>
+            <strong>Learn Mode</strong>
+            <span>See the answer and explanation after each question. Best for building understanding at your own pace.</span>
+          </div>
+        </div>
+        <div className={styles.modeTabWrap}>
+          <button
+            className={`${styles.modeTabBtn} ${activeMode === 'test' ? styles.modeTabTestActive : ''}`}
+            onClick={() => setActiveMode('test')}
+          >
+            Test Mode
+          </button>
+          <div className={styles.modeTooltip}>
+            <strong>Test Mode</strong>
+            <span>Answer all questions first, then review your results at the end. Simulates exam conditions.</span>
+          </div>
+        </div>
       </div>
 
       <div className={styles.statsRow}>

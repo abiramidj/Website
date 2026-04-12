@@ -55,11 +55,68 @@
   background: var(--bg-surface);
   border-radius: var(--r-xl);
   border: 1px solid var(--gray-200);
-  overflow: hidden;
+  overflow: visible;
+}
+
+/* ── Mode tab tooltip wrapper ────────────────────────────────────── */
+.modeTabWrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+}
+
+.modeTooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  background: var(--gray-900);
+  color: var(--bg-surface);
+  border-radius: var(--r-md);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  transform: translateX(-50%) translateY(-4px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.modeTooltip strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.modeTooltip span {
+  opacity: 0.82;
+}
+
+/* Arrow pointing up */
+.modeTooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--gray-900);
+}
+
+.modeTabWrap:hover .modeTooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .modeTabBtn {
   flex: 1;
+  width: 100%;
   padding: 0.85rem 1.5rem;
   font-size: 0.95rem;
   font-weight: 600;
@@ -70,6 +127,14 @@
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
   border-bottom: 3px solid transparent;
+}
+
+/* Round first/last tab buttons to match the bar's border-radius */
+.modeTabWrap:first-child .modeTabBtn {
+  border-radius: var(--r-xl) 0 0 var(--r-xl);
+}
+.modeTabWrap:last-child .modeTabBtn {
+  border-radius: 0 var(--r-xl) var(--r-xl) 0;
 }
 
 .modeTabBtn:hover:not(.modeTabLearnActive):not(.modeTabTestActive) {
