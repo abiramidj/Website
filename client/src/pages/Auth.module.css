@@ -1,7 +1,11 @@
 .page {
-  min-height: calc(100vh - var(--nav-h, 64px));
+  min-height: calc(100vh - var(--nav-h, 68px));
   display: flex;
-  background: var(--bg-page);
+  background: linear-gradient(140deg, #dbeafe 0%, #eff6ff 40%, #e0f2fe 100%);
+}
+
+[data-theme="dark"] .page {
+  background: linear-gradient(140deg, #0f2040 0%, #0f172a 50%, #0c1e38 100%);
 }
 
 /* ── Left brand panel ── */
