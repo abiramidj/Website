@@ -1,11 +1,7 @@
 .page {
   min-height: calc(100vh - var(--nav-h, 68px));
   display: flex;
-  background: linear-gradient(140deg, #dbeafe 0%, #eff6ff 40%, #e0f2fe 100%);
-}
-
-[data-theme="dark"] .page {
-  background: linear-gradient(140deg, #0f2040 0%, #0f172a 50%, #0c1e38 100%);
+  background: var(--bg-page);
 }
 
 /* ── Left brand panel ── */
@@ -466,6 +462,30 @@
   font-size: 0.775rem;
   color: var(--gray-400);
   margin-top: 0.2rem;
+}
+
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .sectionLabel {
+  color: var(--gray-400);
+  border-bottom-color: var(--gray-200);
+}
+
+[data-theme="dark"] .error {
+  background: var(--red-50);
+  border-color: var(--red-500);
+}
+
+[data-theme="dark"] .forgotLink {
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .disclaimer {
+  color: var(--gray-700);
+  border-top-color: var(--gray-200);
+}
+
+[data-theme="dark"] .copyright {
+  color: var(--gray-600);
 }
 
 /* ── Additional mobile fixes ─────────────────────────────────────── */

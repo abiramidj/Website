@@ -273,6 +273,39 @@
   text-decoration: underline;
 }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .warning {
+  background: var(--amber-50);
+  border-color: var(--amber-500);
+  border-left-color: var(--amber-500);
+  color: var(--amber-500);
+}
+
+[data-theme="dark"] .label {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .select,
+[data-theme="dark"] .input {
+  border-color: var(--gray-200);
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .select:disabled,
+[data-theme="dark"] .input:disabled {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .rangeLabels {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .error {
+  background: var(--red-50);
+  border-color: var(--red-500);
+  color: var(--red-500);
+}
+
 /* ── Mobile responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .page { padding: 1.25rem 0 2rem; }

@@ -273,6 +273,56 @@
 .bookmarkBtn:hover { opacity: 0.8; transform: scale(1.15); }
 .bookmarkActive { opacity: 1 !important; }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .search {
+  border-color: var(--gray-200);
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .error {
+  background: var(--red-50);
+  border-color: var(--red-500);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .empty {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .sectionHeader {
+  border-bottom-color: var(--gray-200);
+}
+
+[data-theme="dark"] .sectionTitle {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .sectionCount {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .card {
+  border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .cardTitle {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .cardExcerpt {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .pdfLink {
+  color: var(--brand-blue);
+  border-color: var(--blue-200);
+  background: var(--blue-50);
+}
+
+[data-theme="dark"] .pdfLink:hover {
+  background: var(--blue-100);
+}
+
 /* ── Mobile responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hero { padding: 2rem 1rem 2.5rem; }

@@ -265,6 +265,37 @@
   text-decoration: none;
 }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .page {
+  background: var(--bg-page);
+}
+
+[data-theme="dark"] .summaryCard {
+  background: var(--bg-surface);
+  border-color: var(--gray-200);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .tableWrap {
+  background: var(--bg-surface);
+  border-color: var(--gray-200);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .table th {
+  background: var(--bg-surface-2);
+  border-bottom-color: var(--gray-200);
+}
+
+[data-theme="dark"] .table td {
+  border-bottom-color: var(--gray-100);
+}
+
+[data-theme="dark"] .emptyState {
+  background: var(--bg-surface);
+  border-color: var(--gray-300);
+}
+
 /* ── Mobile responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .header { padding: 1.5rem 1rem 0.75rem; }

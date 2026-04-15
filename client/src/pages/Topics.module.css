@@ -483,6 +483,23 @@
   cursor: not-allowed;
 }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .domainFilter {
+  border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .modeTabLearnActive {
+  color: #2dd4bf;
+  border-bottom-color: #2dd4bf;
+  background: rgba(13, 42, 36, 0.5);
+}
+
+[data-theme="dark"] .modeTabTestActive {
+  color: #a5b4fc;
+  border-bottom-color: #a5b4fc;
+  background: rgba(30, 27, 75, 0.4);
+}
+
 /* ── Mobile responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .header {

@@ -588,6 +588,232 @@
   border-color: var(--brand-blue);
 }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .error {
+  background: var(--red-50);
+  border-color: var(--red-500);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .filterSelect {
+  border-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .totalLabel {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .bulkBar {
+  background: var(--blue-50);
+  border-color: var(--blue-200);
+}
+
+[data-theme="dark"] .bulkCount {
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .bulkApprove {
+  background: var(--green-100);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .bulkApprove:hover:not(:disabled) {
+  background: var(--green-50);
+}
+
+[data-theme="dark"] .bulkReject {
+  background: var(--red-100);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .bulkReject:hover:not(:disabled) {
+  background: var(--red-50);
+}
+
+[data-theme="dark"] .bulkClear {
+  border-color: var(--gray-200);
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .bulkClear:hover {
+  background: var(--gray-100);
+}
+
+[data-theme="dark"] .bulkDelete {
+  background: var(--amber-50);
+  color: var(--amber-600);
+  border-color: var(--amber-100);
+}
+
+[data-theme="dark"] .table th {
+  color: var(--gray-500);
+  border-bottom-color: var(--gray-200);
+}
+
+[data-theme="dark"] .table td {
+  border-bottom-color: var(--gray-100);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .rowSelected td {
+  background: var(--blue-50) !important;
+}
+
+[data-theme="dark"] .emptyCell {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .idCell {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .domainName {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .subtopicName,
+[data-theme="dark"] .questionTrunc {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .diffEasy {
+  background: var(--green-100);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .diffMedium {
+  background: var(--amber-100);
+  color: var(--amber-500);
+}
+
+[data-theme="dark"] .diffHard {
+  background: var(--red-100);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .statusPending {
+  background: var(--amber-100);
+  color: var(--amber-600);
+}
+
+[data-theme="dark"] .statusApproved {
+  background: var(--green-100);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .statusRejected {
+  background: var(--red-100);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .editBtn {
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .editBtn:hover {
+  background: var(--gray-200);
+}
+
+[data-theme="dark"] .approveBtn {
+  background: var(--green-100);
+  border-color: var(--green-500);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .approveBtn:hover:not(:disabled) {
+  background: var(--green-50);
+}
+
+[data-theme="dark"] .rejectBtn {
+  background: var(--red-100);
+  border-color: var(--red-500);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .rejectBtn:hover:not(:disabled) {
+  background: var(--red-50);
+}
+
+[data-theme="dark"] .deleteBtn {
+  background: var(--amber-50);
+  border-color: var(--amber-100);
+  color: var(--amber-600);
+}
+
+[data-theme="dark"] .deleteBtn:hover {
+  background: var(--amber-100);
+}
+
+[data-theme="dark"] .pageBtn {
+  border-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .pageBtn:hover:not(:disabled) {
+  background: var(--gray-100);
+}
+
+[data-theme="dark"] .pageInfo {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .modalHeader {
+  border-bottom-color: var(--gray-200);
+}
+
+[data-theme="dark"] .modalTitle {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .modalClose {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .modalClose:hover {
+  background: var(--gray-100);
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .fieldLabel {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .textarea,
+[data-theme="dark"] .optionInput {
+  border-color: var(--gray-200);
+  color: var(--gray-900);
+  background: var(--bg-surface);
+}
+
+[data-theme="dark"] .modalFooter {
+  border-top-color: var(--gray-200);
+}
+
+[data-theme="dark"] .cancelBtn {
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .cancelBtn:hover:not(:disabled) {
+  background: var(--gray-200);
+}
+
+[data-theme="dark"] .mode_learn {
+  background: rgba(13, 42, 36, 0.5);
+  color: #2dd4bf;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="dark"] .mode_test {
+  background: rgba(30, 27, 75, 0.4);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
 /* ── Mobile responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .page { padding: 1.25rem 0 2rem; }

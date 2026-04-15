@@ -245,6 +245,85 @@
   margin: 0 auto;
 }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .eyebrow {
+  color: var(--brand-blue);
+  background: var(--blue-100);
+}
+
+[data-theme="dark"] .title {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .subtitle {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .activeBanner {
+  background: var(--green-50);
+  border-color: var(--green-500);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .portalBtn {
+  border-color: var(--green-500);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .portalBtn:hover:not(:disabled) {
+  background: var(--green-100);
+}
+
+[data-theme="dark"] .error {
+  background: var(--red-50);
+  border-color: var(--red-500);
+  border-left-color: var(--red-500);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .cardFeatured {
+  border-color: var(--brand-blue);
+}
+
+[data-theme="dark"] .planLabel {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .planPrice {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .planPeriod,
+[data-theme="dark"] .planDesc {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .planBtn {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .planBtn:hover:not(:disabled) {
+  background: var(--blue-50);
+}
+
+[data-theme="dark"] .featuresTitle {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .featureItem {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .fine {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .adminNotice {
+  background: var(--blue-100);
+  color: var(--blue-800);
+}
+
 /* ── Admin notice ── */
 .adminNotice {
   max-width: 480px;

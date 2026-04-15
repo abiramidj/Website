@@ -418,6 +418,206 @@
 .mode_learn { background: #f0fdfc; color: #0d9488; border: 1px solid #99f6e4; }
 .mode_test  { background: #f5f6ff; color: #6366f1; border: 1px solid #c7d2fe; }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .title {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .subtitle {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .templateBtn {
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .templateBtn:hover {
+  background: var(--blue-50);
+}
+
+[data-theme="dark"] .guideCol {
+  background: var(--bg-surface-2);
+  border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .guideTitle {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .guidePre {
+  color: var(--gray-700);
+  background: var(--bg-surface);
+}
+
+[data-theme="dark"] .guideNote {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .inputCard {
+  border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .tabs {
+  background: var(--bg-surface-2);
+}
+
+[data-theme="dark"] .tab {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .tabActive {
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .textarea {
+  color: var(--gray-900);
+  background: var(--bg-surface-2);
+  border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .textarea:focus {
+  background: var(--bg-surface);
+}
+
+[data-theme="dark"] .dropZone {
+  border-color: var(--gray-300);
+}
+
+[data-theme="dark"] .dropZone:hover {
+  border-color: var(--brand-blue);
+  background: var(--blue-50);
+}
+
+[data-theme="dark"] .dropText {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .dropSub {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .errorBox {
+  background: var(--red-50);
+  border-color: var(--red-500);
+  border-left-color: var(--red-500);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .previewCard {
+  border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .previewHeader {
+  border-bottom-color: var(--gray-100);
+  background: var(--bg-surface-2);
+}
+
+[data-theme="dark"] .previewCount {
+  color: var(--gray-900);
+}
+
+[data-theme="dark"] .cancelBtn {
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .cancelBtn:hover {
+  background: var(--gray-200);
+}
+
+[data-theme="dark"] .table th {
+  color: var(--gray-500);
+  background: var(--bg-surface-2);
+  border-bottom-color: var(--gray-200);
+}
+
+[data-theme="dark"] .table td {
+  color: var(--gray-700);
+  border-bottom-color: var(--gray-100);
+}
+
+[data-theme="dark"] .table tbody tr:hover td {
+  background: var(--bg-surface-2);
+}
+
+[data-theme="dark"] .rowError td {
+  background: var(--red-50) !important;
+}
+
+[data-theme="dark"] .tdNum {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .tdSub {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .domainOverrideRow {
+  background: var(--blue-50);
+  border-bottom-color: var(--blue-200);
+}
+
+[data-theme="dark"] .domainOverrideLabel {
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .domainOverrideSelect,
+[data-theme="dark"] .domainCustomInput {
+  color: var(--gray-900);
+  border-color: var(--blue-200);
+}
+
+[data-theme="dark"] .domainOverrideBadge {
+  color: var(--brand-blue);
+  background: var(--blue-50);
+  border-color: var(--blue-200);
+}
+
+[data-theme="dark"] .diff_easy {
+  background: var(--green-100);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .diff_medium {
+  background: var(--amber-100);
+  color: var(--amber-500);
+}
+
+[data-theme="dark"] .diff_hard {
+  background: var(--red-100);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .successCard {
+  background: var(--green-50);
+  border-color: var(--green-500);
+  border-left-color: var(--green-500);
+}
+
+[data-theme="dark"] .successTitle,
+[data-theme="dark"] .successSub {
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .reviewLink {
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .mode_learn {
+  background: rgba(13, 42, 36, 0.5);
+  color: #2dd4bf;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="dark"] .mode_test {
+  background: rgba(30, 27, 75, 0.4);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
 /* ── Mobile responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .page { padding: 1.25rem 1rem 2.5rem; }

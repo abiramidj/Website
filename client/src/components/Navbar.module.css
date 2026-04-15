@@ -457,6 +457,47 @@
   .subscribeBtn { display: none; }
 }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .adminLink {
+  color: #2dd4bf;
+}
+[data-theme="dark"] .adminLink:hover {
+  background: rgba(13, 42, 36, 0.5);
+  color: #2dd4bf;
+}
+[data-theme="dark"] .adminLink.active {
+  background: rgba(13, 42, 36, 0.7);
+  color: #2dd4bf;
+}
+
+[data-theme="dark"] .badgeAdmin {
+  background: var(--blue-100);
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .badgePro {
+  background: var(--green-100);
+  color: var(--green-600);
+}
+
+[data-theme="dark"] .signOutBtn:hover {
+  background: var(--red-50);
+  border-color: var(--red-500);
+  color: var(--red-500);
+}
+
+[data-theme="dark"] .billingLink {
+  color: var(--brand-blue);
+}
+
+[data-theme="dark"] .upgradeLink {
+  color: var(--amber-500);
+}
+
+[data-theme="dark"] .mobileMenu {
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
 /* ── Theme toggle button ─────────────────────────────────────────── */
 .themeToggle {
   display: flex;
