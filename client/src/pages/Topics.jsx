@@ -177,7 +177,7 @@ export default function Topics() {
                 <div className={styles.subtopicsSection}>
                   <button
                     className={styles.subtopicsToggle}
-                    onClick={() => setSubtopicsOpen(s => ({ ...s, [t.topic]: !s[t.topic] }))}
+                    onClick={() => setSubtopicsOpen(s => s[t.topic] ? {} : { [t.topic]: true })}
                   >
                     <span>Subtopics ({t.subtopics.length})</span>
                     <span>{subtopicsOpen[t.topic] ? '▲' : '▼'}</span>
