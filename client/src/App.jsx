@@ -1,8 +1,59 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from './hooks/useAuth.jsx';
+import { useSessionTimeout } from './hooks/useSessionTimeout.js';
 import Navbar from './components/Navbar.jsx';
 import ProtectedRoute, { AdminRoute, SubscribedRoute } from './components/ProtectedRoute.jsx';
+import SessionTimeoutModal from './components/SessionTimeoutModal.jsx';
+
+const IDLE_MS   = 5 * 60 * 1000; // 5 minutes of inactivity
+const WARN_SECS = 60;              // 60-second countdown before sign-out
+
+function SessionTimeoutManager() {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [showWarning, setShowWarning] = useState(false);
+  const [countdown, setCountdown]     = useState(WARN_SECS);
+
+  const handleTimeout = useCallback(async () => {
+    setShowWarning(false);
+    await signOut();
+    navigate('/login', { replace: true, state: { sessionExpired: true } });
+  }, [signOut, navigate]);
+
+  const handleWarn = useCallback(() => {
+    setShowWarning(true);
+    setCountdown(WARN_SECS);
+  }, []);
+
+  const handleCountdown = useCallback((secs) => {
+    setCountdown(secs);
+  }, []);
+
+  const { continueSession } = useSessionTimeout({
+    enabled:     !!user,
+    idleMs:      IDLE_MS,
+    warnSecs:    WARN_SECS,
+    onWarn:      handleWarn,
+    onCountdown: handleCountdown,
+    onTimeout:   handleTimeout,
+  });
+
+  const handleContinue = useCallback(() => {
+    setShowWarning(false);
+    setCountdown(WARN_SECS);
+    continueSession();
+  }, [continueSession]);
+
+  if (!showWarning) return null;
+  return (
+    <SessionTimeoutModal
+      countdown={countdown}
+      onContinue={handleContinue}
+      onSignOut={handleTimeout}
+    />
+  );
+}
 
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
@@ -53,6 +104,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ServerDownHandler />
+      <SessionTimeoutManager />
       <Navbar />
       <main>
         <Routes>

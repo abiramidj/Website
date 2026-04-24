@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.jsx';
 import styles from './Auth.module.css';
 
@@ -12,6 +12,8 @@ export default function Login() {
 
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const sessionExpired = location.state?.sessionExpired === true;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -94,6 +96,12 @@ export default function Login() {
           </div>
 
           <form onSubmit={handleSubmit} className={styles.form}>
+            {sessionExpired && (
+              <div className={styles.error}>
+                <span className={styles.errorIcon}>⏱</span>
+                Your session expired due to inactivity. Please sign in again.
+              </div>
+            )}
             {error && (
               <div className={styles.error}>
                 <span className={styles.errorIcon}>!</span>
