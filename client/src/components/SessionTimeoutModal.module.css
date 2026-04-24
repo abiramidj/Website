@@ -1,0 +1,166 @@
+/* ── Overlay ─────────────────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Card ────────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--r-2xl);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: slideUp 0.2s ease;
+  border: 1px solid var(--gray-200);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Countdown ring ──────────────────────────────────────────────── */
+.ringWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.ring {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--red-50);
+  border: 3px solid var(--red-100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+}
+
+.ringUrgent {
+  border-color: var(--red-500);
+  background: var(--red-100);
+}
+
+.ringNum {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--red-600);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ringSub {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--red-500);
+}
+
+/* ── Icon ────────────────────────────────────────────────────────── */
+.iconWrap {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* ── Text ────────────────────────────────────────────────────────── */
+.title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.body {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin: 0 0 2rem;
+}
+
+.bodyHighlight {
+  font-weight: 700;
+  color: var(--red-600);
+}
+
+/* ── Actions ─────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.stayBtn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-h));
+  color: #ffffff;
+  border: none;
+  border-radius: var(--r-full);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35);
+  letter-spacing: 0.01em;
+}
+
+.stayBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.signOutBtn {
+  width: 100%;
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-full);
+  padding: 0.7rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.signOutBtn:hover {
+  background: var(--red-50);
+  border-color: var(--red-500);
+  color: var(--red-600);
+}
+
+/* ── Dark mode ───────────────────────────────────────────────────── */
+[data-theme="dark"] .ring {
+  background: var(--red-50);
+  border-color: var(--red-100);
+}
+
+[data-theme="dark"] .ringUrgent {
+  border-color: var(--red-500);
+  background: var(--red-50);
+}
