@@ -253,3 +253,27 @@ export function getAdminStudents(getToken, params = {}) {
 export function getStudentAttempts(userId, getToken) {
   return authFetch(`/admin/students/${userId}/attempts`, {}, getToken);
 }
+
+// ── User Management ───────────────────────────────────────────────────
+export function getAdminUsers(getToken, params = {}) {
+  const query = new URLSearchParams(params).toString();
+  return authFetch(`/admin/users${query ? '?' + query : ''}`, {}, getToken);
+}
+
+export function createAdminUser(payload, getToken) {
+  return authFetch('/admin/users', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }, getToken);
+}
+
+export function updateAdminUser(userId, payload, getToken) {
+  return authFetch(`/admin/users/${userId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(payload),
+  }, getToken);
+}
+
+export function deleteAdminUser(userId, getToken) {
+  return authFetch(`/admin/users/${userId}`, { method: 'DELETE' }, getToken);
+}
