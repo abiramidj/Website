@@ -9,7 +9,7 @@
   display: none;
   width: 420px;
   flex-shrink: 0;
-  color: #ffffff;
+  color: #000000;
   position: relative;
   overflow: hidden;
 }
@@ -169,7 +169,7 @@
   font-size: 1.25rem;
   font-weight: 800;
   opacity: 1;
-  color: #ffffff;
+  color: #000000;
   letter-spacing: -0.02em;
 }
 
