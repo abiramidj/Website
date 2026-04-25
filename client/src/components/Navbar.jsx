@@ -64,6 +64,9 @@ export default function Navbar() {
                   <NavLink to="/history" className={({ isActive }) => navClass(isActive)}>History</NavLink>
                 </>
               )}
+              {!isAdmin && (
+                <NavLink to="/blog" className={({ isActive }) => navClass(isActive)}>Blog</NavLink>
+              )}
               {isAdmin && (
                 <>
                   <span className={styles.divider} />
@@ -176,6 +179,9 @@ export default function Navbar() {
               <NavLink to="/library" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Library</NavLink>
               <NavLink to="/history" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>History</NavLink>
             </>
+          )}
+          {!isAdmin && (
+            <NavLink to="/blog" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Blog</NavLink>
           )}
           {isAdmin && (
             <>

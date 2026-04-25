@@ -70,6 +70,8 @@ import AdminDashboard from './pages/admin/AdminDashboard.jsx';
 import Generate from './pages/admin/Generate.jsx';
 import ReviewQueue from './pages/admin/ReviewQueue.jsx';
 import ImportQuestions from './pages/admin/ImportQuestions.jsx';
+import Blogs from './pages/Blogs.jsx';
+import BlogDetail from './pages/BlogDetail.jsx';
 import Chapters from './pages/Chapters.jsx';
 import ChapterDetail from './pages/ChapterDetail.jsx';
 import ManageChapters from './pages/admin/ManageChapters.jsx';
@@ -132,6 +134,12 @@ export default function App() {
           } />
           <Route path="/history" element={
             <SubscribedRoute><History /></SubscribedRoute>
+          } />
+          <Route path="/blog" element={
+            <ProtectedRoute><Blogs /></ProtectedRoute>
+          } />
+          <Route path="/blog/:slug" element={
+            <ProtectedRoute><BlogDetail /></ProtectedRoute>
           } />
           <Route path="/quiz/:topic/learn" element={
             <SubscribedRoute><QuizLearn /></SubscribedRoute>
