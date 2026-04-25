@@ -93,7 +93,7 @@ export default function Register() {
       <div className={styles.panel}>
         <video
           className={styles.panelBg}
-          src="/wallpaper1.mp4"
+          src="/frontpagebg.mp4"
           autoPlay
           loop
           muted

@@ -29,7 +29,7 @@ export default function ForgotPassword() {
       <div className={styles.panel}>
         <video
           className={styles.panelBg}
-          src="/wallpaper1.mp4"
+          src="/frontpagebg.mp4"
           autoPlay loop muted playsInline
         />
         <div className={styles.panelInner}>
