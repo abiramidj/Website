@@ -72,6 +72,7 @@ export default function Navbar() {
                   <NavLink to="/admin/review" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Review</NavLink>
                   <NavLink to="/admin/import" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Import</NavLink>
                   <NavLink to="/admin/chapters" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Chapters</NavLink>
+                  <NavLink to="/admin/users" className={({ isActive }) => navClass(isActive, styles.adminLink)}>Users</NavLink>
                 </>
               )}
             </>
@@ -183,6 +184,7 @@ export default function Navbar() {
               <NavLink to="/admin/review" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Review</NavLink>
               <NavLink to="/admin/import" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Import</NavLink>
               <NavLink to="/admin/chapters" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Chapters</NavLink>
+              <NavLink to="/admin/users" className={({ isActive }) => navClass(isActive, styles.mobileLink)} onClick={closeMenu}>Users</NavLink>
             </>
           )}
           {!isAdmin && !isSubscribed && (

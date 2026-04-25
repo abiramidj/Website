@@ -22,7 +22,7 @@ async function requireAdmin(req, res, next) {
 }
 
 // GET /stats
-router.get('/stats', requireAdmin, async (req, res) => {
+router.get('/stats', requireAdmin, async (_req, res) => {
   try {
     // Total students
     const { count: totalStudents, error: sErr } = await supabaseAdmin
@@ -148,6 +148,132 @@ router.get('/students/:userId/attempts', requireAdmin, async (req, res) => {
 
     if (error) throw error;
     res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── User Management ───────────────────────────────────────────────────
+
+// GET /users — paginated list of all users with emails
+router.get('/users', requireAdmin, async (req, res) => {
+  try {
+    const { page = 1, limit = 20, search = '', role = '' } = req.query;
+    const pageNum  = Math.max(1, parseInt(page)  || 1);
+    const limitNum = Math.min(50, parseInt(limit) || 20);
+    const offset   = (pageNum - 1) * limitNum;
+
+    let query = supabaseAdmin
+      .from('profiles')
+      .select('user_id, full_name, role, subscription_status, created_at', { count: 'exact' })
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limitNum - 1);
+
+    if (role)   query = query.eq('role', role);
+    if (search) query = query.ilike('full_name', `%${search}%`);
+
+    const { data: profiles, error: pErr, count } = await query;
+    if (pErr) throw pErr;
+
+    // Fetch emails from auth in parallel
+    const emailMap = {};
+    await Promise.all(
+      (profiles || []).map(async p => {
+        const { data: { user } } = await supabaseAdmin.auth.admin.getUserById(p.user_id);
+        if (user) emailMap[p.user_id] = user.email;
+      })
+    );
+
+    const users = (profiles || []).map(p => ({
+      ...p,
+      email: emailMap[p.user_id] || '',
+    }));
+
+    res.json({ users, total: count ?? 0, page: pageNum, limit: limitNum });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /users — create a new user
+router.post('/users', requireAdmin, async (req, res) => {
+  try {
+    const { email, password, full_name, role = 'student', subscription_status = null } = req.body;
+    if (!email || !password || !full_name) {
+      return res.status(400).json({ error: 'email, password and full_name are required' });
+    }
+
+    // Create auth user
+    const { data: { user }, error: createErr } = await supabaseAdmin.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+      user_metadata: { full_name },
+    });
+    if (createErr) throw createErr;
+
+    // Upsert profile row (trigger may or may not exist)
+    const { error: profErr } = await supabaseAdmin
+      .from('profiles')
+      .upsert({
+        user_id: user.id,
+        full_name,
+        role,
+        ...(subscription_status ? { subscription_status } : {}),
+      }, { onConflict: 'user_id' });
+    if (profErr) throw profErr;
+
+    res.status(201).json({ id: user.id, email: user.email, full_name, role });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PATCH /users/:userId — update profile fields
+router.patch('/users/:userId', requireAdmin, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { full_name, role, subscription_status } = req.body;
+
+    const updates = {};
+    if (full_name          !== undefined) updates.full_name          = full_name;
+    if (role               !== undefined) updates.role               = role;
+    if (subscription_status !== undefined) updates.subscription_status = subscription_status;
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({ error: 'No fields to update' });
+    }
+
+    const { error } = await supabaseAdmin
+      .from('profiles')
+      .update(updates)
+      .eq('user_id', userId);
+    if (error) throw error;
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE /users/:userId — delete user from auth (cascades to profile)
+router.delete('/users/:userId', requireAdmin, async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Prevent admin from deleting themselves
+    if (userId === req.user.id) {
+      return res.status(400).json({ error: 'You cannot delete your own account' });
+    }
+
+    // Delete profile first (in case no cascade)
+    await supabaseAdmin.from('profiles').delete().eq('user_id', userId);
+
+    // Delete auth user
+    const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
+    if (error) throw error;
+
+    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

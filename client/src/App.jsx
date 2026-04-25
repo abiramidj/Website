@@ -73,6 +73,7 @@ import ImportQuestions from './pages/admin/ImportQuestions.jsx';
 import Chapters from './pages/Chapters.jsx';
 import ChapterDetail from './pages/ChapterDetail.jsx';
 import ManageChapters from './pages/admin/ManageChapters.jsx';
+import ManageUsers from './pages/admin/ManageUsers.jsx';
 import Topics from './pages/Topics.jsx';
 import History from './pages/History.jsx';
 
@@ -166,6 +167,9 @@ export default function App() {
           } />
           <Route path="/admin/chapters" element={
             <AdminRoute><ManageChapters /></AdminRoute>
+          } />
+          <Route path="/admin/users" element={
+            <AdminRoute><ManageUsers /></AdminRoute>
           } />
 
           <Route path="*" element={<Navigate to="/" replace />} />
