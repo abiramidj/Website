@@ -133,28 +133,31 @@
 }
 
 .catBtn {
-  background: var(--bg-surface);
-  border: 1.5px solid var(--gray-200);
-  border-radius: var(--r-full);
+  background: rgba(0,0,0,0.055);
+  border: none;
+  border-radius: 9999px;
   padding: 0.35rem 0.9rem;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--gray-500);
+  color: var(--gray-600);
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition: background 0.12s, transform 0.1s;
   white-space: nowrap;
 }
 
 .catBtn:hover {
-  background: var(--gray-100);
-  color: var(--gray-700);
+  background: rgba(0,0,0,0.09);
+}
+
+.catBtn:active {
+  transform: scale(0.97);
 }
 
 .catBtnActive {
-  background: var(--blue-50);
-  border-color: var(--brand-blue);
+  background: rgba(29,78,216,0.09);
   color: var(--brand-blue);
+  box-shadow: 0 0 0 0.5px rgba(29,78,216,0.18);
 }
 
 /* ── Empty state ── */
@@ -373,7 +376,8 @@
 }
 
 [data-theme="dark"] .catBtnActive {
-  background: var(--blue-100);
+  background: rgba(29,78,216,0.15);
+  color: var(--brand-blue);
 }
 
 /* ── Mobile ── */

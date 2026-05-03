@@ -14,23 +14,25 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: none;
-  border: 1.5px solid var(--gray-200);
-  border-radius: var(--r);
+  background: rgba(0,0,0,0.055);
+  border: none;
+  border-radius: 9999px;
   padding: 0.4rem 1rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--gray-500);
+  color: var(--gray-600);
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.12s, transform 0.1s;
   margin-bottom: 1.75rem;
 }
 
 .backBtn:hover {
-  background: var(--gray-100);
-  border-color: var(--gray-300);
-  color: var(--gray-700);
+  background: rgba(0,0,0,0.09);
+}
+
+.backBtn:active {
+  transform: scale(0.97);
 }
 
 /* ── Article header ── */
