@@ -31,20 +31,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-h));
-  color: #fff;
+  background: rgba(29,78,216,0.09);
+  color: var(--brand-blue);
   border: none;
   font-size: 0.875rem;
   font-weight: 700;
   padding: 0.6rem 1.25rem;
-  border-radius: var(--r);
+  border-radius: 9999px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(29,78,216,0.3);
-  transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(29,78,216,0.12);
+  transition: background 0.12s, box-shadow 0.12s, transform 0.1s;
   font-family: inherit;
   white-space: nowrap;
 }
-.addBtn:hover { opacity: 0.88; transform: translateY(-1px); }
+.addBtn:hover { background: rgba(29,78,216,0.15); transform: translateY(-0.5px); }
+.addBtn:active { transform: scale(0.97); }
 
 /* ── Toolbar ── */
 .toolbar {
@@ -221,32 +222,34 @@
 }
 
 .editBtn {
-  background: var(--blue-50);
-  border: 1px solid var(--blue-200);
+  background: rgba(29,78,216,0.09);
+  border: none;
   color: var(--brand-blue);
-  border-radius: var(--r-sm);
+  border-radius: 9999px;
   padding: 0.3rem 0.7rem;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s;
+  box-shadow: 0 0 0 0.5px rgba(29,78,216,0.12);
+  transition: background 0.12s;
 }
-.editBtn:hover { background: var(--blue-100); }
+.editBtn:hover { background: rgba(29,78,216,0.15); }
 
 .deleteBtn {
-  background: var(--red-50);
-  border: 1px solid var(--red-100);
+  background: rgba(220,38,38,0.09);
+  border: none;
   color: var(--red-600);
-  border-radius: var(--r-sm);
+  border-radius: 9999px;
   padding: 0.3rem 0.7rem;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s;
+  box-shadow: 0 0 0 0.5px rgba(220,38,38,0.12);
+  transition: background 0.12s;
 }
-.deleteBtn:hover:not(:disabled) { background: var(--red-100); }
+.deleteBtn:hover:not(:disabled) { background: rgba(220,38,38,0.15); }
 .deleteBtn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ── Pagination ── */
@@ -259,18 +262,18 @@
 }
 
 .pageBtn {
-  background: var(--bg-surface);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--r);
+  background: rgba(0,0,0,0.055);
+  border: none;
+  border-radius: 9999px;
   padding: 0.5rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--gray-700);
+  color: var(--gray-600);
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s;
+  transition: background 0.12s;
 }
-.pageBtn:hover:not(:disabled) { background: var(--gray-100); }
+.pageBtn:hover:not(:disabled) { background: rgba(0,0,0,0.09); }
 .pageBtn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .pageInfo {
@@ -396,33 +399,35 @@
 }
 
 .cancelBtn {
-  background: var(--gray-100);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--r);
+  background: rgba(0,0,0,0.055);
+  border: none;
+  border-radius: 9999px;
   padding: 0.6rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--gray-600);
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s;
+  transition: background 0.12s;
 }
-.cancelBtn:hover { background: var(--gray-200); }
+.cancelBtn:hover { background: rgba(0,0,0,0.09); }
+.cancelBtn:active { transform: scale(0.97); }
 
 .saveBtn {
-  background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-h));
+  background: rgba(29,78,216,0.09);
   border: none;
-  border-radius: var(--r);
+  border-radius: 9999px;
   padding: 0.6rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--brand-blue);
   cursor: pointer;
   font-family: inherit;
-  transition: opacity 0.15s;
-  box-shadow: 0 2px 8px rgb(29 78 216 / 0.25);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(29,78,216,0.12);
+  transition: background 0.12s, box-shadow 0.12s, transform 0.1s;
 }
-.saveBtn:hover:not(:disabled) { opacity: 0.9; }
+.saveBtn:hover:not(:disabled) { background: rgba(29,78,216,0.15); transform: translateY(-0.5px); }
+.saveBtn:active:not(:disabled) { transform: scale(0.97); }
 .saveBtn:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* ── Delete confirm modal ── */
@@ -453,18 +458,20 @@
 }
 
 .confirmDeleteBtn {
-  background: var(--red-600);
+  background: rgba(220,38,38,0.09);
   border: none;
-  border-radius: var(--r);
+  border-radius: 9999px;
   padding: 0.6rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--red-600);
   cursor: pointer;
   font-family: inherit;
-  transition: opacity 0.15s;
+  box-shadow: 0 0 0 0.5px rgba(220,38,38,0.18);
+  transition: background 0.12s, transform 0.1s;
 }
-.confirmDeleteBtn:hover:not(:disabled) { opacity: 0.88; }
+.confirmDeleteBtn:hover:not(:disabled) { background: rgba(220,38,38,0.15); transform: translateY(-0.5px); }
+.confirmDeleteBtn:active:not(:disabled) { transform: scale(0.97); }
 .confirmDeleteBtn:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* ── Mobile ── */

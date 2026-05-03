@@ -97,22 +97,23 @@
 }
 
 .filterBtn {
-  background: var(--gray-50);
-  border: 1.5px solid var(--gray-200);
-  color: var(--gray-500);
+  background: rgba(0,0,0,0.055);
+  border: none;
+  color: var(--gray-600);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.4rem 0.9rem;
-  border-radius: var(--r);
+  border-radius: 9999px;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition: background 0.12s, color 0.12s;
 }
-.filterBtn:hover { background: var(--blue-50); border-color: var(--blue-200); color: var(--brand-blue); }
+.filterBtn:hover { background: rgba(0,0,0,0.09); color: var(--gray-700); }
+.filterBtn:active { transform: scale(0.97); }
 .filterActive {
-  background: var(--blue-50);
-  border-color: var(--blue-200);
+  background: rgba(29,78,216,0.09);
   color: var(--brand-blue);
+  box-shadow: 0 0 0 0.5px rgba(29,78,216,0.18);
 }
 
 /* Error / Empty */

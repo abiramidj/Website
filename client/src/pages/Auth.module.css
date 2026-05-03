@@ -370,7 +370,7 @@
   background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
   color: #0c4a6e;
   border: none;
-  border-radius: var(--r-full);
+  border-radius: 9999px;
   padding: 0.7rem 1.25rem;
   font-size: 0.9rem;
   font-weight: 700;
@@ -390,7 +390,7 @@
   box-shadow: 0 6px 20px 0 rgb(125 211 252 / 0.5);
 }
 
-.submitBtn:active:not(:disabled) { transform: translateY(0); }
+.submitBtn:active:not(:disabled) { transform: scale(0.97); }
 
 .submitBtn:disabled {
   opacity: 0.55;
