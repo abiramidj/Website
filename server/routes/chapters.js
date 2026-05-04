@@ -1,19 +1,9 @@
 import { Router } from 'express';
-import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
+import { verifyToken, getUserRole, requireSubscription, supabaseAdmin } from '../lib/supabase.js';
 
 const router = Router();
 
 // ── Middleware ─────────────────────────────────────────────────────────────
-async function requireAuth(req, res, next) {
-  try {
-    const token = (req.headers.authorization || '').replace('Bearer ', '');
-    req.user = await verifyToken(token);
-    next();
-  } catch (err) {
-    res.status(err.status || 401).json({ error: err.message });
-  }
-}
-
 async function requireAdmin(req, res, next) {
   try {
     const token = (req.headers.authorization || '').replace('Bearer ', '');
@@ -38,7 +28,7 @@ function slugify(title) {
 }
 
 // ── GET /api/chapters — list published chapters (students) ─────────────────
-router.get('/', requireAuth, async (req, res) => {
+router.get('/', requireSubscription, async (req, res) => {
   try {
     const { domain } = req.query;
     let query = supabaseAdmin
@@ -74,7 +64,7 @@ router.get('/admin/all', requireAdmin, async (req, res) => {
 });
 
 // ── GET /api/chapters/:slug — get full chapter content ─────────────────────
-router.get('/:slug', requireAuth, async (req, res) => {
+router.get('/:slug', requireSubscription, async (req, res) => {
   try {
     const { data, error } = await supabaseAdmin
       .from('chapters')

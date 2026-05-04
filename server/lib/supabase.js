@@ -42,3 +42,35 @@ export async function getUserRole(userId) {
   if (error || !data) return 'student';
   return data.role;
 }
+
+/**
+ * Express middleware: requires an active or trialing subscription.
+ * Admins bypass the check automatically.
+ */
+export async function requireSubscription(req, res, next) {
+  try {
+    const token = (req.headers.authorization || '').replace('Bearer ', '');
+    const user = await verifyToken(token);
+
+    const { data } = await supabaseAdmin
+      .from('profiles')
+      .select('subscription_status, role')
+      .eq('user_id', user.id)
+      .single();
+
+    if (data?.role === 'admin') {
+      req.user = user;
+      return next();
+    }
+
+    const status = data?.subscription_status;
+    if (status !== 'active' && status !== 'trialing') {
+      return res.status(403).json({ error: 'Pro subscription required' });
+    }
+
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(err.status || 401).json({ error: err.message });
+  }
+}
