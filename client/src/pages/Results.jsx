@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.jsx';
+import { getAttempt } from '../lib/api.js';
 import styles from './Results.module.css';
 
 const OPTION_LABELS = ['A', 'B', 'C', 'D'];
@@ -29,9 +30,10 @@ export default function Results() {
 
   useEffect(() => {
     if (!data) {
-      // If no state passed, could fetch from API — for now show message
-      setLoading(false);
-      setError('Result data not found. Please go back to the dashboard.');
+      getAttempt(attemptId, getToken)
+        .then(setData)
+        .catch(err => setError(err.message))
+        .finally(() => setLoading(false));
     }
   }, []);
 

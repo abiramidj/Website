@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
+import { validate, updateQuestionSchema, bulkUpdateSchema, bulkDeleteSchema, questionsListQuerySchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -20,11 +21,9 @@ async function requireAdmin(req, res, next) {
 }
 
 // GET / — list questions with filters and pagination
-router.get('/', requireAdmin, async (req, res) => {
+router.get('/', requireAdmin, validate(questionsListQuerySchema, 'query'), async (req, res) => {
   try {
-    const { status, domain, page = 1, limit = 20 } = req.query;
-    const pageNum = Math.max(1, parseInt(page) || 1);
-    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 20));
+    const { status, domain, page: pageNum, limit: limitNum } = req.query;
     const offset = (pageNum - 1) * limitNum;
 
     let query = supabaseAdmin.from('questions').select('*', { count: 'exact' });
@@ -46,7 +45,7 @@ router.get('/', requireAdmin, async (req, res) => {
 });
 
 // GET /stats — question counts grouped by domain+status
-router.get('/stats', requireAdmin, async (req, res) => {
+router.get('/stats', requireAdmin, async (_req, res) => {
   try {
     const { data, error } = await supabaseAdmin
       .from('questions')
@@ -84,7 +83,7 @@ router.get('/stats', requireAdmin, async (req, res) => {
 });
 
 // GET /domains — list all known domains (from questions + chapters)
-router.get('/domains', requireAdmin, async (req, res) => {
+router.get('/domains', requireAdmin, async (_req, res) => {
   try {
     const [q, c] = await Promise.all([
       supabaseAdmin.from('questions').select('domain').not('domain', 'is', null),
@@ -103,7 +102,7 @@ router.get('/domains', requireAdmin, async (req, res) => {
 });
 
 // PATCH /:id — update a question
-router.patch('/:id', requireAdmin, async (req, res) => {
+router.patch('/:id', requireAdmin, validate(updateQuestionSchema), async (req, res) => {
   try {
     const { id } = req.params;
     const { status, question, options, correct, explanation } = req.body;
@@ -136,7 +135,7 @@ router.patch('/:id', requireAdmin, async (req, res) => {
 });
 
 // PATCH /bulk/update — bulk status update
-router.patch('/bulk/update', requireAdmin, async (req, res) => {
+router.patch('/bulk/update', requireAdmin, validate(bulkUpdateSchema), async (req, res) => {
   try {
     const { ids, status } = req.body;
 
@@ -162,7 +161,7 @@ router.patch('/bulk/update', requireAdmin, async (req, res) => {
 });
 
 // DELETE /bulk/delete — bulk delete rejected questions (must be before /:id)
-router.delete('/bulk/delete', requireAdmin, async (req, res) => {
+router.delete('/bulk/delete', requireAdmin, validate(bulkDeleteSchema), async (req, res) => {
   try {
     const { ids } = req.body;
     if (!Array.isArray(ids) || ids.length === 0) {

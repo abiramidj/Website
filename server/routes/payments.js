@@ -1,6 +1,7 @@
 import express from 'express';
 import Stripe from 'stripe';
 import { verifyToken, supabaseAdmin } from '../lib/supabase.js';
+import { validate, checkoutSessionSchema } from '../lib/validate.js';
 
 const router = express.Router();
 
@@ -25,11 +26,11 @@ router.get('/status', async (req, res, next) => {
 });
 
 // ── POST /api/payments/create-checkout-session ───────────────────────────────
-router.post('/create-checkout-session', async (req, res, next) => {
+router.post('/create-checkout-session', validate(checkoutSessionSchema), async (req, res, next) => {
   try {
     const token = (req.headers.authorization || '').replace('Bearer ', '');
     const user  = await verifyToken(token);
-    const { plan } = req.body; // 'monthly' | 'annual'
+    const { plan } = req.body;
 
     const priceId = plan === 'annual'
       ? process.env.STRIPE_PRICE_ANNUAL

@@ -48,6 +48,10 @@ export function getAttempts(getToken) {
   return authFetch('/quiz/attempts', {}, getToken);
 }
 
+export function getAttempt(id, getToken) {
+  return authFetch(`/quiz/attempts/${id}`, {}, getToken);
+}
+
 export function getTopicHistory(topic, getToken) {
   return authFetch(`/quiz/history/${encodeURIComponent(topic)}`, {}, getToken);
 }
