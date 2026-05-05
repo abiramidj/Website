@@ -53,7 +53,11 @@ app.use(cors({
   origin: CLIENT_URL,
   credentials: true,
 }));
-app.use(express.json());
+
+// Request size limits — large limit only for bulk import, tight everywhere else
+app.use('/api/import', express.json({ limit: '2mb' }));
+app.use('/api/generate', express.json({ limit: '16kb' }));
+app.use(express.json({ limit: '64kb' }));
 app.use((_req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
   next();
