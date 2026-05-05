@@ -4,6 +4,12 @@ import { useAuth } from '../hooks/useAuth.jsx';
 import { getChapter } from '../lib/api.js';
 import styles from './ChapterDetail.module.css';
 
+// Only allow http/https PDF URLs — block javascript: and other protocols
+function safePdfUrl(url) {
+  if (!url) return null;
+  return /^https?:\/\//i.test(url) ? url : null;
+}
+
 // ── Lightweight markdown → HTML renderer (no dependencies) ────────────────
 function renderMarkdown(md) {
   if (!md) return '';
@@ -113,8 +119,8 @@ export default function ChapterDetail() {
               year: 'numeric', month: 'long', day: 'numeric',
             })}
           </p>
-          {chapter.pdf_url && (
-            <a href={chapter.pdf_url} target="_blank" rel="noopener noreferrer" className={styles.pdfBtn}>
+          {safePdfUrl(chapter.pdf_url) && (
+            <a href={safePdfUrl(chapter.pdf_url)} target="_blank" rel="noopener noreferrer" className={styles.pdfBtn}>
               Download PDF
             </a>
           )}

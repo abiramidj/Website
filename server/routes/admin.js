@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
+import { validate, createUserSchema, updateUserSchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -196,7 +197,7 @@ router.get('/users', requireAdmin, async (req, res) => {
 });
 
 // POST /users — create a new user
-router.post('/users', requireAdmin, async (req, res) => {
+router.post('/users', requireAdmin, validate(createUserSchema), async (req, res) => {
   try {
     const { email, password, full_name, role = 'student', subscription_status = null } = req.body;
     if (!email || !password || !full_name) {
@@ -230,7 +231,7 @@ router.post('/users', requireAdmin, async (req, res) => {
 });
 
 // PATCH /users/:userId — update profile fields
-router.patch('/users/:userId', requireAdmin, async (req, res) => {
+router.patch('/users/:userId', requireAdmin, validate(updateUserSchema), async (req, res) => {
   try {
     const { userId } = req.params;
     const { full_name, role, subscription_status } = req.body;

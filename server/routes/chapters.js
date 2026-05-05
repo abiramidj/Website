@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, requireSubscription, supabaseAdmin } from '../lib/supabase.js';
+import { validate, createChapterSchema, updateChapterSchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -81,7 +82,7 @@ router.get('/:slug', requireSubscription, async (req, res) => {
 });
 
 // ── POST /api/chapters — create chapter (admin) ────────────────────────────
-router.post('/', requireAdmin, async (req, res) => {
+router.post('/', requireAdmin, validate(createChapterSchema), async (req, res) => {
   try {
     const { title, excerpt, content, domain, subtopic, order_index, published } = req.body;
     if (!title?.trim()) return res.status(400).json({ error: 'title is required' });
@@ -110,7 +111,7 @@ router.post('/', requireAdmin, async (req, res) => {
 });
 
 // ── PATCH /api/chapters/:id — update chapter (admin) ──────────────────────
-router.patch('/:id', requireAdmin, async (req, res) => {
+router.patch('/:id', requireAdmin, validate(updateChapterSchema), async (req, res) => {
   try {
     const allowed = ['title', 'excerpt', 'content', 'domain', 'subtopic', 'order_index', 'published', 'pdf_url'];
     const updates = {};

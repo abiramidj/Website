@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { requireSubscription, supabaseAdmin } from '../lib/supabase.js';
+import { validate, quizStartSchema, quizSubmitSchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -58,7 +59,7 @@ router.get('/topics', requireSubscription, async (req, res) => {
 });
 
 // POST /start — start a quiz session
-router.post('/start', requireSubscription, async (req, res) => {
+router.post('/start', requireSubscription, validate(quizStartSchema), async (req, res) => {
   try {
     const { topic, subtopic, mode } = req.body;
     const userId = req.user.id;
@@ -143,7 +144,7 @@ router.post('/start', requireSubscription, async (req, res) => {
 });
 
 // POST /submit — score and store quiz attempt
-router.post('/submit', requireSubscription, async (req, res) => {
+router.post('/submit', requireSubscription, validate(quizSubmitSchema), async (req, res) => {
   try {
     const { topic, questionIds, answers } = req.body;
     const userId = req.user.id;
@@ -277,6 +278,39 @@ router.get('/history/:topic', requireSubscription, async (req, res) => {
 
     if (error) throw error;
     res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /attempts/:id — single attempt detail (owner only)
+router.get('/attempts/:id', requireSubscription, async (req, res) => {
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('quiz_attempts')
+      .select('id, topic, score, total, correct, responses, created_at')
+      .eq('id', req.params.id)
+      .eq('student_id', req.user.id)
+      .single();
+
+    if (error || !data) return res.status(404).json({ error: 'Attempt not found' });
+
+    // Rebuild subtopicBreakdown from responses
+    const subtopicMap = {};
+    for (const r of data.responses || []) {
+      const st = r.subtopic || 'General';
+      if (!subtopicMap[st]) subtopicMap[st] = { correct: 0, total: 0 };
+      subtopicMap[st].total++;
+      if (r.isCorrect) subtopicMap[st].correct++;
+    }
+    const subtopicBreakdown = Object.entries(subtopicMap).map(([subtopic, s]) => ({
+      subtopic,
+      correct: s.correct,
+      total: s.total,
+      percentage: s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0,
+    }));
+
+    res.json({ ...data, subtopicBreakdown });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

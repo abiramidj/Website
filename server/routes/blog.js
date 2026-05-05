@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
+import { validate, createBlogSchema, updateBlogSchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -98,7 +99,7 @@ router.get('/:slug', async (req, res) => {
 });
 
 // POST / — admin: create post
-router.post('/', requireAdmin, async (req, res) => {
+router.post('/', requireAdmin, validate(createBlogSchema), async (req, res) => {
   try {
     const { title, content, excerpt, topic_tag, published = false } = req.body;
 
@@ -130,7 +131,7 @@ router.post('/', requireAdmin, async (req, res) => {
 });
 
 // PATCH /:id — admin: update post
-router.patch('/:id', requireAdmin, async (req, res) => {
+router.patch('/:id', requireAdmin, validate(updateBlogSchema), async (req, res) => {
   try {
     const { id } = req.params;
     const { title, content, excerpt, topic_tag, published } = req.body;

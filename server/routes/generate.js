@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
 import { anthropic, buildGenerationPrompt } from '../lib/claude.js';
+import { validate, generateSchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -27,7 +28,7 @@ function validateQuestion(q) {
   return true;
 }
 
-router.post('/', async (req, res) => {
+router.post('/', validate(generateSchema), async (req, res) => {
   // Auth check
   let user;
   try {
@@ -42,13 +43,8 @@ router.post('/', async (req, res) => {
     return res.status(err.status || 401).json({ error: err.message });
   }
 
-  const { domain, subtopic, difficulty, level, count = 10 } = req.body;
-
-  if (!domain || !DOMAIN_PREFIX[domain]) {
-    return res.status(400).json({ error: 'Invalid domain. Must be one of: Breast Cancer, GI Tumors, Surgical Techniques' });
-  }
-
-  const totalCount = Math.min(Math.max(1, parseInt(count) || 10), 50);
+  const { domain, subtopic, difficulty, level, count } = req.body;
+  const totalCount = count; // already validated and defaulted by zod schema
   const prefix = DOMAIN_PREFIX[domain];
   const BATCH_SIZE = 10;
 
