@@ -75,6 +75,18 @@ router.get('/:slug', requireSubscription, async (req, res) => {
       .single();
 
     if (error || !data) return res.status(404).json({ error: 'Chapter not found' });
+
+    // Replace stored public URL with a short-lived signed URL (1-hour expiry)
+    if (data.pdf_url) {
+      const storagePath = data.pdf_url.split('/chapter-pdfs/')[1];
+      if (storagePath) {
+        const { data: signed } = await supabaseAdmin.storage
+          .from('chapter-pdfs')
+          .createSignedUrl(storagePath, 3600);
+        data.pdf_url = signed?.signedUrl || null;
+      }
+    }
+
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });

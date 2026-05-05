@@ -161,5 +161,6 @@ export const checkoutSessionSchema = z.object({
 // ── File upload schema ─────────────────────────────────────────────────────
 export const pdfUploadSchema = z.object({
   filename: z.string().min(1).max(200)
-    .regex(/^[\w.\- ]+$/, 'filename contains invalid characters'),
+    .regex(/^[\w.\- ]+$/, 'filename contains invalid characters')
+    .refine(f => f.toLowerCase().endsWith('.pdf'), 'Only PDF files are allowed'),
 });
