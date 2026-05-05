@@ -1,6 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 import generateRouter from './routes/generate.js';
 import questionsRouter from './routes/questions.js';
@@ -17,10 +19,36 @@ app.set('etag', false);
 const PORT = process.env.PORT || 3001;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
+// Rate limiters
+const defaultLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, please try again later.' },
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many login attempts, please try again later.' },
+});
+
+const generateLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'AI generation rate limit reached, please wait a moment.' },
+});
+
 // Stripe webhook needs raw body — register BEFORE express.json()
 app.use('/api/payments/webhook', express.raw({ type: 'application/json' }));
 
 // Middleware
+app.use(helmet());
 app.use(cors({
   origin: CLIENT_URL,
   credentials: true,
@@ -30,6 +58,7 @@ app.use((_req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
   next();
 });
+app.use('/api', defaultLimiter);
 
 // Health check
 app.get('/api/health', (_req, res) => {
@@ -37,13 +66,13 @@ app.get('/api/health', (_req, res) => {
 });
 
 // Routes
-app.use('/api/generate', generateRouter);
+app.use('/api/generate', generateLimiter, generateRouter);
 app.use('/api/questions', questionsRouter);
 app.use('/api/quiz', quizRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/import', importRouter);
-app.use('/api/auth', authRouter);
+app.use('/api/auth', authLimiter, authRouter);
 app.use('/api/chapters', chaptersRouter);
 app.use('/api/payments', paymentsRouter);
 

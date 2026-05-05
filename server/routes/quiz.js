@@ -1,24 +1,12 @@
 import { Router } from 'express';
-import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
+import { requireSubscription, supabaseAdmin } from '../lib/supabase.js';
 
 const router = Router();
 
 const QUIZ_SIZE = 20;
 
-// Auth middleware
-async function requireAuth(req, res, next) {
-  try {
-    const token = (req.headers.authorization || '').replace('Bearer ', '');
-    const user = await verifyToken(token);
-    req.user = user;
-    next();
-  } catch (err) {
-    res.status(err.status || 401).json({ error: err.message });
-  }
-}
-
 // GET /topics — topic list with question counts and student progress
-router.get('/topics', requireAuth, async (req, res) => {
+router.get('/topics', requireSubscription, async (req, res) => {
   try {
     const userId = req.user.id;
 
@@ -70,7 +58,7 @@ router.get('/topics', requireAuth, async (req, res) => {
 });
 
 // POST /start — start a quiz session
-router.post('/start', requireAuth, async (req, res) => {
+router.post('/start', requireSubscription, async (req, res) => {
   try {
     const { topic, subtopic, mode } = req.body;
     const userId = req.user.id;
@@ -155,7 +143,7 @@ router.post('/start', requireAuth, async (req, res) => {
 });
 
 // POST /submit — score and store quiz attempt
-router.post('/submit', requireAuth, async (req, res) => {
+router.post('/submit', requireSubscription, async (req, res) => {
   try {
     const { topic, questionIds, answers } = req.body;
     const userId = req.user.id;
@@ -275,7 +263,7 @@ router.post('/submit', requireAuth, async (req, res) => {
 });
 
 // GET /history/:topic — attempt history for student+topic
-router.get('/history/:topic', requireAuth, async (req, res) => {
+router.get('/history/:topic', requireSubscription, async (req, res) => {
   try {
     const { topic } = req.params;
     const userId = req.user.id;
@@ -295,7 +283,7 @@ router.get('/history/:topic', requireAuth, async (req, res) => {
 });
 
 // GET /attempts — all attempts for the logged-in student
-router.get('/attempts', requireAuth, async (req, res) => {
+router.get('/attempts', requireSubscription, async (req, res) => {
   try {
     const userId = req.user.id;
 
