@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, requireSubscription, supabaseAdmin } from '../lib/supabase.js';
-import { validate, createChapterSchema, updateChapterSchema } from '../lib/validate.js';
+import { validate, createChapterSchema, updateChapterSchema, chaptersListQuerySchema, pdfUploadSchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -29,7 +29,7 @@ function slugify(title) {
 }
 
 // ── GET /api/chapters — list published chapters (students) ─────────────────
-router.get('/', requireSubscription, async (req, res) => {
+router.get('/', requireSubscription, validate(chaptersListQuerySchema, 'query'), async (req, res) => {
   try {
     const { domain } = req.query;
     let query = supabaseAdmin
@@ -50,7 +50,7 @@ router.get('/', requireSubscription, async (req, res) => {
 });
 
 // ── GET /api/chapters/admin/all — list all chapters for admins ─────────────
-router.get('/admin/all', requireAdmin, async (req, res) => {
+router.get('/admin/all', requireAdmin, async (_req, res) => {
   try {
     const { data, error } = await supabaseAdmin
       .from('chapters')
@@ -138,10 +138,9 @@ router.patch('/:id', requireAdmin, validate(updateChapterSchema), async (req, re
 });
 
 // ── POST /api/chapters/:id/pdf-upload-url — get signed upload URL (admin) ──
-router.post('/:id/pdf-upload-url', requireAdmin, async (req, res, next) => {
+router.post('/:id/pdf-upload-url', requireAdmin, validate(pdfUploadSchema), async (req, res, next) => {
   try {
     const { filename } = req.body;
-    if (!filename) return res.status(400).json({ error: 'filename is required' });
 
     const path = `${req.params.id}/${Date.now()}-${filename.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
 

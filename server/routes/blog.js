@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
-import { validate, createBlogSchema, updateBlogSchema } from '../lib/validate.js';
+import { validate, createBlogSchema, updateBlogSchema, blogListQuerySchema, adminListQuerySchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -31,11 +31,9 @@ function slugify(title) {
 }
 
 // GET /admin/all — admin: list all posts (must come before /:slug)
-router.get('/admin/all', requireAdmin, async (req, res) => {
+router.get('/admin/all', requireAdmin, validate(adminListQuerySchema, 'query'), async (req, res) => {
   try {
-    const { page = 1, limit = 20 } = req.query;
-    const pageNum = Math.max(1, parseInt(page) || 1);
-    const limitNum = Math.min(100, parseInt(limit) || 20);
+    const { page: pageNum, limit: limitNum } = req.query;
     const offset = (pageNum - 1) * limitNum;
 
     const { data, error, count } = await supabaseAdmin
@@ -52,11 +50,9 @@ router.get('/admin/all', requireAdmin, async (req, res) => {
 });
 
 // GET / — public: list published posts
-router.get('/', async (req, res) => {
+router.get('/', validate(blogListQuerySchema, 'query'), async (req, res) => {
   try {
-    const { page = 1, limit = 12, topic } = req.query;
-    const pageNum = Math.max(1, parseInt(page) || 1);
-    const limitNum = Math.min(50, parseInt(limit) || 12);
+    const { page: pageNum, limit: limitNum, topic } = req.query;
     const offset = (pageNum - 1) * limitNum;
 
     let query = supabaseAdmin

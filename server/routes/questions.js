@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
-import { validate, updateQuestionSchema, bulkUpdateSchema, bulkDeleteSchema } from '../lib/validate.js';
+import { validate, updateQuestionSchema, bulkUpdateSchema, bulkDeleteSchema, questionsListQuerySchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -21,11 +21,9 @@ async function requireAdmin(req, res, next) {
 }
 
 // GET / — list questions with filters and pagination
-router.get('/', requireAdmin, async (req, res) => {
+router.get('/', requireAdmin, validate(questionsListQuerySchema, 'query'), async (req, res) => {
   try {
-    const { status, domain, page = 1, limit = 20 } = req.query;
-    const pageNum = Math.max(1, parseInt(page) || 1);
-    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 20));
+    const { status, domain, page: pageNum, limit: limitNum } = req.query;
     const offset = (pageNum - 1) * limitNum;
 
     let query = supabaseAdmin.from('questions').select('*', { count: 'exact' });

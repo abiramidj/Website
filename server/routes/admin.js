@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { verifyToken, getUserRole, supabaseAdmin } from '../lib/supabase.js';
-import { validate, createUserSchema, updateUserSchema } from '../lib/validate.js';
+import { validate, createUserSchema, updateUserSchema, adminListQuerySchema, adminUsersQuerySchema } from '../lib/validate.js';
 
 const router = Router();
 
@@ -88,11 +88,9 @@ router.get('/stats', requireAdmin, async (_req, res) => {
 });
 
 // GET /students — paginated list of students
-router.get('/students', requireAdmin, async (req, res) => {
+router.get('/students', requireAdmin, validate(adminListQuerySchema, 'query'), async (req, res) => {
   try {
-    const { page = 1, limit = 20 } = req.query;
-    const pageNum = Math.max(1, parseInt(page) || 1);
-    const limitNum = Math.min(100, parseInt(limit) || 20);
+    const { page: pageNum, limit: limitNum } = req.query;
     const offset = (pageNum - 1) * limitNum;
 
     const { data: profiles, error: pErr, count } = await supabaseAdmin
@@ -157,12 +155,10 @@ router.get('/students/:userId/attempts', requireAdmin, async (req, res) => {
 // ── User Management ───────────────────────────────────────────────────
 
 // GET /users — paginated list of all users with emails
-router.get('/users', requireAdmin, async (req, res) => {
+router.get('/users', requireAdmin, validate(adminUsersQuerySchema, 'query'), async (req, res) => {
   try {
-    const { page = 1, limit = 20, search = '', role = '' } = req.query;
-    const pageNum  = Math.max(1, parseInt(page)  || 1);
-    const limitNum = Math.min(50, parseInt(limit) || 20);
-    const offset   = (pageNum - 1) * limitNum;
+    const { page: pageNum, limit: limitNum, search, role } = req.query;
+    const offset = (pageNum - 1) * limitNum;
 
     let query = supabaseAdmin
       .from('profiles')

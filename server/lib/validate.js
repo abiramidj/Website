@@ -41,7 +41,7 @@ export const quizSubmitSchema = z.object({
 
 // ── Admin user schemas ─────────────────────────────────────────────────────
 export const createUserSchema = z.object({
-  email:               z.string().email(),
+  email:               z.email(),
   password:            z.string().min(8).max(128),
   full_name:           z.string().min(1).max(100).trim(),
   role:                z.enum(['student', 'admin']).optional().default('student'),
@@ -90,7 +90,7 @@ export const updateChapterSchema = z.object({
   subtopic:    z.string().max(100).trim().optional(),
   order_index: z.number().int().min(0).optional(),
   published:   z.boolean().optional(),
-  pdf_url:     z.string().url().startsWith('https://').nullable().optional(),
+  pdf_url:     z.url().refine(u => u.startsWith('https://'), 'URL must use HTTPS').nullable().optional(),
 });
 
 // ── Question schemas ───────────────────────────────────────────────────────
@@ -118,4 +118,48 @@ export const generateSchema = z.object({
   difficulty: z.enum(DIFFICULTIES).optional(),
   level:      z.enum(LEVELS).optional(),
   count:      z.number().int().min(1).max(50).optional().default(10),
+});
+
+// ── Query-param schemas (z.coerce.number for string→int coercion) ──────────
+const pageField  = z.coerce.number().int().min(1).optional().default(1);
+const limitField = (max) => z.coerce.number().int().min(1).max(max).optional().default(20);
+
+export const blogListQuerySchema = z.object({
+  page:  pageField,
+  limit: limitField(50),
+  topic: z.string().max(100).trim().optional(),
+});
+
+export const adminListQuerySchema = z.object({
+  page:  pageField,
+  limit: limitField(100),
+});
+
+export const adminUsersQuerySchema = z.object({
+  page:   pageField,
+  limit:  limitField(50),
+  search: z.string().max(200).trim().optional().default(''),
+  role:   z.enum(['student', 'admin']).optional(),
+});
+
+export const questionsListQuerySchema = z.object({
+  page:   pageField,
+  limit:  limitField(100),
+  status: z.enum(Q_STATUSES).optional(),
+  domain: z.string().max(100).trim().optional(),
+});
+
+export const chaptersListQuerySchema = z.object({
+  domain: z.string().max(100).trim().optional(),
+});
+
+// ── Payment schema ─────────────────────────────────────────────────────────
+export const checkoutSessionSchema = z.object({
+  plan: z.enum(['monthly', 'annual']),
+});
+
+// ── File upload schema ─────────────────────────────────────────────────────
+export const pdfUploadSchema = z.object({
+  filename: z.string().min(1).max(200)
+    .regex(/^[\w.\- ]+$/, 'filename contains invalid characters'),
 });
